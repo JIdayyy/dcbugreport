@@ -1,0 +1,12 @@
+export { AggregateWebsiteArgs } from "./AggregateWebsiteArgs";
+export { CreateManyWebsiteArgs } from "./CreateManyWebsiteArgs";
+export { CreateWebsiteArgs } from "./CreateWebsiteArgs";
+export { DeleteManyWebsiteArgs } from "./DeleteManyWebsiteArgs";
+export { DeleteWebsiteArgs } from "./DeleteWebsiteArgs";
+export { FindFirstWebsiteArgs } from "./FindFirstWebsiteArgs";
+export { FindManyWebsiteArgs } from "./FindManyWebsiteArgs";
+export { FindUniqueWebsiteArgs } from "./FindUniqueWebsiteArgs";
+export { GroupByWebsiteArgs } from "./GroupByWebsiteArgs";
+export { UpdateManyWebsiteArgs } from "./UpdateManyWebsiteArgs";
+export { UpdateWebsiteArgs } from "./UpdateWebsiteArgs";
+export { UpsertWebsiteArgs } from "./UpsertWebsiteArgs";

@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/generated/graphql"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  first_name  String
+  last_name   String
+  email       String   @unique
+  password    String
+  is_disabled Boolean
+  files       File[]
+  avatar      String?
+  role        Role[]
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  Bug         Bug[]
+}
+
+model File {
+  id          String   @id @default(uuid())
+  name        String
+  path        String
+  size        Int
+  type        String
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     String
+  bug         Bug      @relation(fields: [bugId], references: [id])
+  is_disabled Boolean
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  bugId       String
+}
+
+model Bug {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  status      String
+  priority    String
+  severity    String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  Website     Website? @relation(fields: [websiteId], references: [id])
+  websiteId   String?
+  File        File[]
+}
+
+model Website {
+  id         String   @id @default(uuid())
+  name       String
+  url        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  Bug        Bug[]
+}
+
+enum Status_Notification {
+  READ
+  UNREAD
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  USER
+}

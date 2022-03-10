@@ -1,0 +1,12 @@
+export { AggregateBugArgs } from "./AggregateBugArgs";
+export { CreateBugArgs } from "./CreateBugArgs";
+export { CreateManyBugArgs } from "./CreateManyBugArgs";
+export { DeleteBugArgs } from "./DeleteBugArgs";
+export { DeleteManyBugArgs } from "./DeleteManyBugArgs";
+export { FindFirstBugArgs } from "./FindFirstBugArgs";
+export { FindManyBugArgs } from "./FindManyBugArgs";
+export { FindUniqueBugArgs } from "./FindUniqueBugArgs";
+export { GroupByBugArgs } from "./GroupByBugArgs";
+export { UpdateBugArgs } from "./UpdateBugArgs";
+export { UpdateManyBugArgs } from "./UpdateManyBugArgs";
+export { UpsertBugArgs } from "./UpsertBugArgs";
