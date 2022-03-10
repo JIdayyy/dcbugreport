@@ -22,6 +22,16 @@ export class WebsiteMaxAggregate {
   })
   url!: string | null;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  logo!: string | null;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  isPreview!: boolean | null;
+
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })

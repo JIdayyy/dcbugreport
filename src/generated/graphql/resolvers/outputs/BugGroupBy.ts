@@ -5,6 +5,9 @@ import { DecimalJSScalar } from "../../scalars";
 import { BugCountAggregate } from "../outputs/BugCountAggregate";
 import { BugMaxAggregate } from "../outputs/BugMaxAggregate";
 import { BugMinAggregate } from "../outputs/BugMinAggregate";
+import { BugPriority } from "../../enums/BugPriority";
+import { BugSeverity } from "../../enums/BugSeverity";
+import { BugStatus } from "../../enums/BugStatus";
 
 @TypeGraphQL.ObjectType("BugGroupBy", {
   isAbstract: true
@@ -25,20 +28,20 @@ export class BugGroupBy {
   })
   description!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugStatus, {
     nullable: false
   })
-  status!: string;
+  status!: "OPEN" | "IN_PROGRESS" | "CLOSED";
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugPriority, {
     nullable: false
   })
-  priority!: string;
+  priority!: "LOW" | "MEDIUM" | "HIGH";
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugSeverity, {
     nullable: false
   })
-  severity!: string;
+  severity!: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW";
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -56,9 +59,14 @@ export class BugGroupBy {
   userId!: string;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  websiteId!: string;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  websiteId!: string | null;
+  categoryId!: string | null;
 
   @TypeGraphQL.Field(_type => BugCountAggregate, {
     nullable: true

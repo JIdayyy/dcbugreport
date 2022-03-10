@@ -35,5 +35,5 @@ export class FindManyWebsiteArgs {
   @TypeGraphQL.Field(_type => [WebsiteScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "name" | "url" | "created_at" | "updated_at"> | undefined;
+  distinct?: Array<"id" | "name" | "url" | "logo" | "isPreview" | "created_at" | "updated_at"> | undefined;
 }

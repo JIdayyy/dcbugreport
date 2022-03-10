@@ -57,4 +57,9 @@ export class BugMaxOrderByAggregateInput {
     nullable: true
   })
   websiteId?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  categoryId?: "asc" | "desc" | undefined;
 }

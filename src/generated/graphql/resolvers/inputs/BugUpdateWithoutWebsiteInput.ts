@@ -2,7 +2,11 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { CategoryUpdateOneWithoutBugInput } from "../inputs/CategoryUpdateOneWithoutBugInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { EnumBugPriorityFieldUpdateOperationsInput } from "../inputs/EnumBugPriorityFieldUpdateOperationsInput";
+import { EnumBugSeverityFieldUpdateOperationsInput } from "../inputs/EnumBugSeverityFieldUpdateOperationsInput";
+import { EnumBugStatusFieldUpdateOperationsInput } from "../inputs/EnumBugStatusFieldUpdateOperationsInput";
 import { FileUpdateManyWithoutBugInput } from "../inputs/FileUpdateManyWithoutBugInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateOneRequiredWithoutBugInput } from "../inputs/UserUpdateOneRequiredWithoutBugInput";
@@ -26,20 +30,20 @@ export class BugUpdateWithoutWebsiteInput {
   })
   description?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => EnumBugStatusFieldUpdateOperationsInput, {
     nullable: true
   })
-  status?: StringFieldUpdateOperationsInput | undefined;
+  status?: EnumBugStatusFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => EnumBugPriorityFieldUpdateOperationsInput, {
     nullable: true
   })
-  priority?: StringFieldUpdateOperationsInput | undefined;
+  priority?: EnumBugPriorityFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => EnumBugSeverityFieldUpdateOperationsInput, {
     nullable: true
   })
-  severity?: StringFieldUpdateOperationsInput | undefined;
+  severity?: EnumBugSeverityFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -60,4 +64,9 @@ export class BugUpdateWithoutWebsiteInput {
     nullable: true
   })
   File?: FileUpdateManyWithoutBugInput | undefined;
+
+  @TypeGraphQL.Field(_type => CategoryUpdateOneWithoutBugInput, {
+    nullable: true
+  })
+  Category?: CategoryUpdateOneWithoutBugInput | undefined;
 }

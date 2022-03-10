@@ -10,7 +10,8 @@ export enum BugScalarFieldEnum {
   created_at = "created_at",
   updated_at = "updated_at",
   userId = "userId",
-  websiteId = "websiteId"
+  websiteId = "websiteId",
+  categoryId = "categoryId"
 }
 TypeGraphQL.registerEnumType(BugScalarFieldEnum, {
   name: "BugScalarFieldEnum",

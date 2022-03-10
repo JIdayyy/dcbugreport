@@ -23,6 +23,16 @@ export class WebsiteCreateInput {
   })
   url!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  logo!: string;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  isPreview!: boolean;
+
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })

@@ -1,5 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import { Bug } from "../../../models/Bug";
+import { Category } from "../../../models/Category";
 import { File } from "../../../models/File";
 import { User } from "../../../models/User";
 import { Website } from "../../../models/Website";
@@ -20,9 +21,9 @@ export class BugRelationsResolver {
   }
 
   @TypeGraphQL.FieldResolver(_type => Website, {
-    nullable: true
+    nullable: false
   })
-  async Website(@TypeGraphQL.Root() bug: Bug, @TypeGraphQL.Ctx() ctx: any): Promise<Website | null> {
+  async Website(@TypeGraphQL.Root() bug: Bug, @TypeGraphQL.Ctx() ctx: any): Promise<Website> {
     return getPrismaFromContext(ctx).bug.findUnique({
       where: {
         id: bug.id,
@@ -39,5 +40,16 @@ export class BugRelationsResolver {
         id: bug.id,
       },
     }).File(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => Category, {
+    nullable: true
+  })
+  async Category(@TypeGraphQL.Root() bug: Bug, @TypeGraphQL.Ctx() ctx: any): Promise<Category | null> {
+    return getPrismaFromContext(ctx).bug.findUnique({
+      where: {
+        id: bug.id,
+      },
+    }).Category({});
   }
 }

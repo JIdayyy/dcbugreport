@@ -2,9 +2,13 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
+import { Category } from "../models/Category";
 import { File } from "../models/File";
 import { User } from "../models/User";
 import { Website } from "../models/Website";
+import { BugPriority } from "../enums/BugPriority";
+import { BugSeverity } from "../enums/BugSeverity";
+import { BugStatus } from "../enums/BugStatus";
 import { BugCount } from "../resolvers/outputs/BugCount";
 
 @TypeGraphQL.ObjectType("Bug", {
@@ -26,20 +30,20 @@ export class Bug {
   })
   description!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugStatus, {
     nullable: false
   })
-  status!: string;
+  status!: "OPEN" | "IN_PROGRESS" | "CLOSED";
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugPriority, {
     nullable: false
   })
-  priority!: string;
+  priority!: "LOW" | "MEDIUM" | "HIGH";
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugSeverity, {
     nullable: false
   })
-  severity!: string;
+  severity!: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW";
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
@@ -58,14 +62,21 @@ export class Bug {
   })
   userId!: string;
 
-  Website?: Website | null;
+  Website?: Website;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  websiteId!: string;
+
+  File?: File[];
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  websiteId?: string | null;
+  categoryId?: string | null;
 
-  File?: File[];
+  Category?: Category | null;
 
   @TypeGraphQL.Field(_type => BugCount, {
     nullable: true

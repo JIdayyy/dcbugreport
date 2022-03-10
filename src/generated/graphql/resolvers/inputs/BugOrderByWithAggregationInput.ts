@@ -61,6 +61,11 @@ export class BugOrderByWithAggregationInput {
   })
   websiteId?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  categoryId?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => BugCountOrderByAggregateInput, {
     nullable: true
   })

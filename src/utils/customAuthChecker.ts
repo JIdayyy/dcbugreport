@@ -11,21 +11,21 @@ const customAuthChecker: AuthChecker<{
   res: Response;
   prisma: PrismaClient;
 }> = async ({ context }, roles) => {
-  // if (
-  //   clientTypeChecker(context.req) === 'web' &&
-  //   (await webClientAuthCheck(context, roles))
-  // ) {
-  //   return true;
-  // }
-  // if (
-  //   clientTypeChecker(context.req) === 'mobile' &&
-  //   (await mobileClientAuthChecker(context, roles))
-  // ) {
-  //   return true;
-  // }
-  // if (await webClientAuthCheck(context, roles)) {
-  //   return true;
-  // }
+  if (
+    clientTypeChecker(context.req) === 'web' &&
+    (await webClientAuthCheck(context, roles))
+  ) {
+    return true;
+  }
+  if (
+    clientTypeChecker(context.req) === 'mobile' &&
+    (await mobileClientAuthChecker(context, roles))
+  ) {
+    return true;
+  }
+  if (await webClientAuthCheck(context, roles)) {
+    return true;
+  }
   return true;
 };
 

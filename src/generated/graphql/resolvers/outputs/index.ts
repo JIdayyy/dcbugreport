@@ -1,5 +1,6 @@
 export { AffectedRowsOutput } from "./AffectedRowsOutput";
 export { AggregateBug } from "./AggregateBug";
+export { AggregateCategory } from "./AggregateCategory";
 export { AggregateFile } from "./AggregateFile";
 export { AggregateUser } from "./AggregateUser";
 export { AggregateWebsite } from "./AggregateWebsite";
@@ -8,6 +9,11 @@ export { BugCountAggregate } from "./BugCountAggregate";
 export { BugGroupBy } from "./BugGroupBy";
 export { BugMaxAggregate } from "./BugMaxAggregate";
 export { BugMinAggregate } from "./BugMinAggregate";
+export { CategoryCount } from "./CategoryCount";
+export { CategoryCountAggregate } from "./CategoryCountAggregate";
+export { CategoryGroupBy } from "./CategoryGroupBy";
+export { CategoryMaxAggregate } from "./CategoryMaxAggregate";
+export { CategoryMinAggregate } from "./CategoryMinAggregate";
 export { FileAvgAggregate } from "./FileAvgAggregate";
 export { FileCountAggregate } from "./FileCountAggregate";
 export { FileGroupBy } from "./FileGroupBy";

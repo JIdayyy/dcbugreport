@@ -3,6 +3,9 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
+import { EnumBugPriorityWithAggregatesFilter } from "../inputs/EnumBugPriorityWithAggregatesFilter";
+import { EnumBugSeverityWithAggregatesFilter } from "../inputs/EnumBugSeverityWithAggregatesFilter";
+import { EnumBugStatusWithAggregatesFilter } from "../inputs/EnumBugStatusWithAggregatesFilter";
 import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
@@ -40,20 +43,20 @@ export class BugScalarWhereWithAggregatesInput {
   })
   description?: StringWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => EnumBugStatusWithAggregatesFilter, {
     nullable: true
   })
-  status?: StringWithAggregatesFilter | undefined;
+  status?: EnumBugStatusWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => EnumBugPriorityWithAggregatesFilter, {
     nullable: true
   })
-  priority?: StringWithAggregatesFilter | undefined;
+  priority?: EnumBugPriorityWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => EnumBugSeverityWithAggregatesFilter, {
     nullable: true
   })
-  severity?: StringWithAggregatesFilter | undefined;
+  severity?: EnumBugSeverityWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeWithAggregatesFilter, {
     nullable: true
@@ -70,8 +73,13 @@ export class BugScalarWhereWithAggregatesInput {
   })
   userId?: StringWithAggregatesFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+    nullable: true
+  })
+  websiteId?: StringWithAggregatesFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true
   })
-  websiteId?: StringNullableWithAggregatesFilter | undefined;
+  categoryId?: StringNullableWithAggregatesFilter | undefined;
 }

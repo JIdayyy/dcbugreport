@@ -4,6 +4,8 @@ export enum WebsiteScalarFieldEnum {
   id = "id",
   name = "name",
   url = "url",
+  logo = "logo",
+  isPreview = "isPreview",
   created_at = "created_at",
   updated_at = "updated_at"
 }

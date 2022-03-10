@@ -8,10 +8,10 @@ import { WebsiteUpdateWithoutBugInput } from "../inputs/WebsiteUpdateWithoutBugI
 import { WebsiteUpsertWithoutBugInput } from "../inputs/WebsiteUpsertWithoutBugInput";
 import { WebsiteWhereUniqueInput } from "../inputs/WebsiteWhereUniqueInput";
 
-@TypeGraphQL.InputType("WebsiteUpdateOneWithoutBugInput", {
+@TypeGraphQL.InputType("WebsiteUpdateOneRequiredWithoutBugInput", {
   isAbstract: true
 })
-export class WebsiteUpdateOneWithoutBugInput {
+export class WebsiteUpdateOneRequiredWithoutBugInput {
   @TypeGraphQL.Field(_type => WebsiteCreateWithoutBugInput, {
     nullable: true
   })
@@ -26,16 +26,6 @@ export class WebsiteUpdateOneWithoutBugInput {
     nullable: true
   })
   upsert?: WebsiteUpsertWithoutBugInput | undefined;
-
-  @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true
-  })
-  disconnect?: boolean | undefined;
-
-  @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true
-  })
-  delete?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => WebsiteWhereUniqueInput, {
     nullable: true

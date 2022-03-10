@@ -20,7 +20,7 @@ export class GroupByBugArgs {
   @TypeGraphQL.Field(_type => [BugScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "title" | "description" | "status" | "priority" | "severity" | "created_at" | "updated_at" | "userId" | "websiteId">;
+  by!: Array<"id" | "title" | "description" | "status" | "priority" | "severity" | "created_at" | "updated_at" | "userId" | "websiteId" | "categoryId">;
 
   @TypeGraphQL.Field(_type => BugScalarWhereWithAggregatesInput, {
     nullable: true

@@ -26,6 +26,16 @@ export class WebsiteCountOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  logo?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  isPreview?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   created_at?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {

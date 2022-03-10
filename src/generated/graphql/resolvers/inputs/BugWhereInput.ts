@@ -2,7 +2,11 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { CategoryRelationFilter } from "../inputs/CategoryRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { EnumBugPriorityFilter } from "../inputs/EnumBugPriorityFilter";
+import { EnumBugSeverityFilter } from "../inputs/EnumBugSeverityFilter";
+import { EnumBugStatusFilter } from "../inputs/EnumBugStatusFilter";
 import { FileListRelationFilter } from "../inputs/FileListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
@@ -43,20 +47,20 @@ export class BugWhereInput {
   })
   description?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => EnumBugStatusFilter, {
     nullable: true
   })
-  status?: StringFilter | undefined;
+  status?: EnumBugStatusFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => EnumBugPriorityFilter, {
     nullable: true
   })
-  priority?: StringFilter | undefined;
+  priority?: EnumBugPriorityFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => EnumBugSeverityFilter, {
     nullable: true
   })
-  severity?: StringFilter | undefined;
+  severity?: EnumBugSeverityFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
     nullable: true
@@ -83,13 +87,23 @@ export class BugWhereInput {
   })
   Website?: WebsiteRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringNullableFilter, {
+  @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
-  websiteId?: StringNullableFilter | undefined;
+  websiteId?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => FileListRelationFilter, {
     nullable: true
   })
   File?: FileListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  categoryId?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => CategoryRelationFilter, {
+    nullable: true
+  })
+  Category?: CategoryRelationFilter | undefined;
 }

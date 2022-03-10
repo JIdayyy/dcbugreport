@@ -2,6 +2,9 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { BugPriority } from "../../enums/BugPriority";
+import { BugSeverity } from "../../enums/BugSeverity";
+import { BugStatus } from "../../enums/BugStatus";
 
 @TypeGraphQL.ObjectType("BugMinAggregate", {
   isAbstract: true
@@ -22,20 +25,20 @@ export class BugMinAggregate {
   })
   description!: string | null;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugStatus, {
     nullable: true
   })
-  status!: string | null;
+  status!: "OPEN" | "IN_PROGRESS" | "CLOSED" | null;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugPriority, {
     nullable: true
   })
-  priority!: string | null;
+  priority!: "LOW" | "MEDIUM" | "HIGH" | null;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => BugSeverity, {
     nullable: true
   })
-  severity!: string | null;
+  severity!: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | null;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
@@ -56,4 +59,9 @@ export class BugMinAggregate {
     nullable: true
   })
   websiteId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  categoryId!: string | null;
 }

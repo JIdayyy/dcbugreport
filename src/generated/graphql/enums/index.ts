@@ -1,8 +1,11 @@
+export { BugPriority } from "./BugPriority";
 export { BugScalarFieldEnum } from "./BugScalarFieldEnum";
+export { BugSeverity } from "./BugSeverity";
+export { BugStatus } from "./BugStatus";
+export { CategoryScalarFieldEnum } from "./CategoryScalarFieldEnum";
 export { FileScalarFieldEnum } from "./FileScalarFieldEnum";
 export { QueryMode } from "./QueryMode";
 export { Role } from "./Role";
 export { SortOrder } from "./SortOrder";
-export { Status_Notification } from "./Status_Notification";
 export { UserScalarFieldEnum } from "./UserScalarFieldEnum";
 export { WebsiteScalarFieldEnum } from "./WebsiteScalarFieldEnum";

@@ -9,7 +9,6 @@ import { buildSchema } from 'type-graphql';
 import { resolvers } from './generated/graphql';
 import prisma from '../prisma/prismaClient';
 import customAuthChecker from './utils/customAuthChecker';
-import { UploadFile } from './custom_resolvers/UploadFileResolver';
 import { RegisterResolver } from './custom_resolvers/auth/register';
 import { LoginResolver } from './custom_resolvers/auth/login';
 import { Resolve } from './authConfig';

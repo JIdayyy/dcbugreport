@@ -25,6 +25,16 @@ export class WebsiteCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  logo!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  isPreview!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   created_at!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
