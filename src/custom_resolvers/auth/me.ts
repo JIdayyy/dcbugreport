@@ -55,7 +55,7 @@ export class MeResolver {
         secure: process.env.NODE_ENV === 'production',
         domain:
           process.env.NODE_ENV === 'production'
-            ? 'https://2109-wns-remote1-yellowteam-front.vercel.app/'
+            ? 'https://2109-wns-remote1-yellowteam-front.vercel.app'
             : 'http://localhost:3000',
       });
 
