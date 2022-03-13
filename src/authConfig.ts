@@ -18,6 +18,12 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
   User: {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
   },
+  Website: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
+  },
+  Category: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
+  },
 };
 
 export const Resolve = () => applyResolversEnhanceMap(resolversEnhanceMap);
