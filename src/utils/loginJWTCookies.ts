@@ -35,6 +35,8 @@ const loginJWTCookies = async (ctx, data) => {
 
   cookies.set('token', token, {
     httpOnly: true,
+    signed: true,
+    secure: process.env.NODE_ENV === 'production',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
