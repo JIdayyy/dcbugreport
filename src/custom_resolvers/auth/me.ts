@@ -15,7 +15,9 @@ export class MeResolver {
     @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response }
   ): Promise<UserWithoutCountAndPassword> {
     if (platformTypeChecker(ctx.req) === 'web') {
-      const cookies = new Cookies(ctx.req, ctx.res);
+      const cookies = new Cookies(ctx.req, ctx.res, {
+        secure: true,
+      });
 
       const token = cookies.get('token');
 
@@ -53,7 +55,7 @@ export class MeResolver {
         secure: process.env.NODE_ENV === 'production',
         domain:
           process.env.NODE_ENV === 'production'
-            ? 'https://ytask-client.vercel.app/'
+            ? 'https://2109-wns-remote1-yellowteam-front.vercel.app/'
             : 'http://localhost:3000',
       });
 
