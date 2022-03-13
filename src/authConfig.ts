@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Role } from '@prisma/client';
 import { Authorized } from 'type-graphql';

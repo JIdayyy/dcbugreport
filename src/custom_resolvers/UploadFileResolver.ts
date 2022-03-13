@@ -6,6 +6,7 @@ import { Stream } from 'stream';
 import { Request } from 'express';
 import { Dropbox } from 'dropbox';
 import { PrismaClient } from '.prisma/client';
+import { Role } from 'src/generated/graphql';
 import { File } from '../generated/graphql/models/File';
 
 const config = {
@@ -23,7 +24,7 @@ export interface Upload {
 
 @Resolver()
 export class UploadFile {
-  @Authorized()
+  @Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)
   @Mutation(() => File, {
     nullable: false,
   })
