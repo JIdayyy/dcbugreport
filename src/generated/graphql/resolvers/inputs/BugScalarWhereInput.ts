@@ -6,6 +6,7 @@ import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumBugPriorityFilter } from "../inputs/EnumBugPriorityFilter";
 import { EnumBugSeverityFilter } from "../inputs/EnumBugSeverityFilter";
 import { EnumBugStatusFilter } from "../inputs/EnumBugStatusFilter";
+import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
@@ -37,6 +38,11 @@ export class BugScalarWhereInput {
     nullable: true
   })
   title?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntFilter, {
+    nullable: true
+  })
+  number?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

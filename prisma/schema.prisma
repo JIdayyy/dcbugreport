@@ -58,6 +58,7 @@ model Category {
 model Bug {
   id          String      @id @default(uuid())
   title       String
+  number      Int         @default(autoincrement())
   description String
   status      BugStatus   @default(OPEN)
   priority    BugPriority @default(MEDIUM)

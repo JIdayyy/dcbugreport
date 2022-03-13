@@ -6,6 +6,7 @@ import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFi
 import { EnumBugPriorityWithAggregatesFilter } from "../inputs/EnumBugPriorityWithAggregatesFilter";
 import { EnumBugSeverityWithAggregatesFilter } from "../inputs/EnumBugSeverityWithAggregatesFilter";
 import { EnumBugStatusWithAggregatesFilter } from "../inputs/EnumBugStatusWithAggregatesFilter";
+import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
@@ -37,6 +38,11 @@ export class BugScalarWhereWithAggregatesInput {
     nullable: true
   })
   title?: StringWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntWithAggregatesFilter, {
+    nullable: true
+  })
+  number?: IntWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true

@@ -14,6 +14,7 @@ const { PORT } = process.env;
   await server.start();
 
   app.use(graphqlUploadExpress());
+  // app.use(morgan('combined'));
 
   server.applyMiddleware({
     app,

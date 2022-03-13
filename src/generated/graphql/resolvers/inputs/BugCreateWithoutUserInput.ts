@@ -23,6 +23,11 @@ export class BugCreateWithoutUserInput {
   })
   title!: string;
 
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  number?: number | undefined;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })

@@ -10,13 +10,13 @@ import {
 
 const resolversEnhanceMap: ResolversEnhanceMap = {
   File: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
   },
   Bug: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
   },
   User: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
   },
 };
 

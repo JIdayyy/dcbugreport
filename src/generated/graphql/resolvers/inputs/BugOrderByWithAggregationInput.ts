@@ -2,9 +2,11 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { BugAvgOrderByAggregateInput } from "../inputs/BugAvgOrderByAggregateInput";
 import { BugCountOrderByAggregateInput } from "../inputs/BugCountOrderByAggregateInput";
 import { BugMaxOrderByAggregateInput } from "../inputs/BugMaxOrderByAggregateInput";
 import { BugMinOrderByAggregateInput } from "../inputs/BugMinOrderByAggregateInput";
+import { BugSumOrderByAggregateInput } from "../inputs/BugSumOrderByAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("BugOrderByWithAggregationInput", {
@@ -20,6 +22,11 @@ export class BugOrderByWithAggregationInput {
     nullable: true
   })
   title?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  number?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -71,6 +78,11 @@ export class BugOrderByWithAggregationInput {
   })
   _count?: BugCountOrderByAggregateInput | undefined;
 
+  @TypeGraphQL.Field(_type => BugAvgOrderByAggregateInput, {
+    nullable: true
+  })
+  _avg?: BugAvgOrderByAggregateInput | undefined;
+
   @TypeGraphQL.Field(_type => BugMaxOrderByAggregateInput, {
     nullable: true
   })
@@ -80,4 +92,9 @@ export class BugOrderByWithAggregationInput {
     nullable: true
   })
   _min?: BugMinOrderByAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => BugSumOrderByAggregateInput, {
+    nullable: true
+  })
+  _sum?: BugSumOrderByAggregateInput | undefined;
 }

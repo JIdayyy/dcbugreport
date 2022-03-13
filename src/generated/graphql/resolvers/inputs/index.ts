@@ -1,6 +1,7 @@
 export { BoolFieldUpdateOperationsInput } from "./BoolFieldUpdateOperationsInput";
 export { BoolFilter } from "./BoolFilter";
 export { BoolWithAggregatesFilter } from "./BoolWithAggregatesFilter";
+export { BugAvgOrderByAggregateInput } from "./BugAvgOrderByAggregateInput";
 export { BugCountOrderByAggregateInput } from "./BugCountOrderByAggregateInput";
 export { BugCreateInput } from "./BugCreateInput";
 export { BugCreateManyCategoryInput } from "./BugCreateManyCategoryInput";
@@ -31,6 +32,7 @@ export { BugOrderByWithRelationInput } from "./BugOrderByWithRelationInput";
 export { BugRelationFilter } from "./BugRelationFilter";
 export { BugScalarWhereInput } from "./BugScalarWhereInput";
 export { BugScalarWhereWithAggregatesInput } from "./BugScalarWhereWithAggregatesInput";
+export { BugSumOrderByAggregateInput } from "./BugSumOrderByAggregateInput";
 export { BugUpdateInput } from "./BugUpdateInput";
 export { BugUpdateManyMutationInput } from "./BugUpdateManyMutationInput";
 export { BugUpdateManyWithWhereWithoutCategoryInput } from "./BugUpdateManyWithWhereWithoutCategoryInput";

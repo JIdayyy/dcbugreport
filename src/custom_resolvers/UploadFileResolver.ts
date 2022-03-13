@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
@@ -34,12 +35,17 @@ export class UploadFile {
 
     const file = await dbx.filesUpload({
       contents: createReadStream(),
-      path: `/${userId}/${bugId}/${filename}`,
+      path: `/userid/${userId}/bugid/${bugId}/${filename}`,
     });
-    const link = await dbx.sharingCreateSharedLinkWithSettings({
-      path: file.result.path_display as string,
-    });
+    const link = await dbx
+      .sharingCreateSharedLinkWithSettings({
+        path: file.result.path_display as string,
+      })
+      .catch((err) => console.log(err));
 
+    if (!file || !link) {
+      throw new Error('Error');
+    }
     const newFile = await ctx.prisma.file.create({
       data: {
         name: filename,

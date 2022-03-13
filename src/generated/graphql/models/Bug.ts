@@ -25,6 +25,11 @@ export class Bug {
   })
   title!: string;
 
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  number!: number;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })

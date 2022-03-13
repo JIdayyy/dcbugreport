@@ -26,7 +26,6 @@ const customAuthChecker: AuthChecker<{
   if (await webClientAuthCheck(context, roles)) {
     return true;
   }
-  return true;
+  return webClientAuthCheck(context, roles);
 };
-
 export default customAuthChecker;

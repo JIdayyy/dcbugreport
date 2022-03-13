@@ -3,6 +3,7 @@ import * as TypeGraphQL from "type-graphql";
 export enum BugScalarFieldEnum {
   id = "id",
   title = "title",
+  number = "number",
   description = "description",
   status = "status",
   priority = "priority",

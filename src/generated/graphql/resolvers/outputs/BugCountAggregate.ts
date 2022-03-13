@@ -20,6 +20,11 @@ export class BugCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  number!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   description!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

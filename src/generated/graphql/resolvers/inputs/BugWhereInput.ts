@@ -8,6 +8,7 @@ import { EnumBugPriorityFilter } from "../inputs/EnumBugPriorityFilter";
 import { EnumBugSeverityFilter } from "../inputs/EnumBugSeverityFilter";
 import { EnumBugStatusFilter } from "../inputs/EnumBugStatusFilter";
 import { FileListRelationFilter } from "../inputs/FileListRelationFilter";
+import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
@@ -41,6 +42,11 @@ export class BugWhereInput {
     nullable: true
   })
   title?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => IntFilter, {
+    nullable: true
+  })
+  number?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

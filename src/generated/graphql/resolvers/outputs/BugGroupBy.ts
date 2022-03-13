@@ -2,9 +2,11 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { BugAvgAggregate } from "../outputs/BugAvgAggregate";
 import { BugCountAggregate } from "../outputs/BugCountAggregate";
 import { BugMaxAggregate } from "../outputs/BugMaxAggregate";
 import { BugMinAggregate } from "../outputs/BugMinAggregate";
+import { BugSumAggregate } from "../outputs/BugSumAggregate";
 import { BugPriority } from "../../enums/BugPriority";
 import { BugSeverity } from "../../enums/BugSeverity";
 import { BugStatus } from "../../enums/BugStatus";
@@ -22,6 +24,11 @@ export class BugGroupBy {
     nullable: false
   })
   title!: string;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  number!: number;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: false
@@ -72,6 +79,16 @@ export class BugGroupBy {
     nullable: true
   })
   _count!: BugCountAggregate | null;
+
+  @TypeGraphQL.Field(_type => BugAvgAggregate, {
+    nullable: true
+  })
+  _avg!: BugAvgAggregate | null;
+
+  @TypeGraphQL.Field(_type => BugSumAggregate, {
+    nullable: true
+  })
+  _sum!: BugSumAggregate | null;
 
   @TypeGraphQL.Field(_type => BugMinAggregate, {
     nullable: true
