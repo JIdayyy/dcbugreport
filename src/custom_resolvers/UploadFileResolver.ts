@@ -6,8 +6,7 @@ import { Stream } from 'stream';
 import { Request } from 'express';
 import { Dropbox } from 'dropbox';
 import { PrismaClient } from '.prisma/client';
-import { Role } from 'src/generated/graphql';
-import { File } from '../generated/graphql/models/File';
+import { File, Role } from '../generated/graphql';
 
 const config = {
   accessToken: process.env.DROPBOX_TOKEN,

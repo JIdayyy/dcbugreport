@@ -2,10 +2,10 @@
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
+import { User } from '../../generated/graphql';
 import loginJWTCookies from '../../utils/loginJWTCookies';
 import platformTypeChecker from '../../utils/platformTypeChecker';
 import loginAuthorizationHeader from '../../utils/loginAuthorisationHeader';
-import { User } from '../../generated/graphql/models/User';
 import { UserWithoutCountAndPassword } from '../models/register';
 import { LoginInput } from '../models/login';
 

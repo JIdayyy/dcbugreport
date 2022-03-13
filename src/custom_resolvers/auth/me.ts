@@ -4,8 +4,8 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { User } from '../../generated/graphql/models/User';
 import { UserWithoutCountAndPassword } from '../models/register';
+import { User } from '../../generated/graphql';
 import platformTypeChecker from '../../utils/platformTypeChecker';
 
 @Resolver()
