@@ -52,6 +52,7 @@ export class MeResolver {
 
       cookies.set('token', newToken, {
         httpOnly: true,
+        sameSite: 'none',
         secure: process.env.NODE_ENV === 'production',
         domain:
           process.env.NODE_ENV === 'production'
