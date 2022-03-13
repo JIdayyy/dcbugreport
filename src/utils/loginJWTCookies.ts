@@ -1,12 +1,18 @@
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Cookies from 'cookies';
+import { LoginInput } from 'src/custom_resolvers/models/login';
+import { Request, Response } from 'express';
+import { PrismaClient } from '@prisma/client';
 
-const loginJWTCookies = async (ctx, data) => {
+const loginJWTCookies = async (
+  ctx: { prisma: PrismaClient; req: Request; res: Response },
+  data: LoginInput
+) => {
   const cookies = new Cookies(ctx.req, ctx.res, {
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
   });
-
+  console.log('ici');
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
@@ -32,11 +38,11 @@ const loginJWTCookies = async (ctx, data) => {
   );
 
   const { password, ...userWithoutPassword } = user;
-
+  // ctx.res.cookie('token', token);
   cookies.set('token', token, {
-    httpOnly: true,
+    httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
