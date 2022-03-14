@@ -12,7 +12,6 @@ const loginJWTCookies = async (
   const cookies = new Cookies(ctx.req, ctx.res, {
     secure: process.env.NODE_ENV === 'production',
   });
-  console.log('ici');
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
@@ -38,7 +37,7 @@ const loginJWTCookies = async (
   );
 
   const { password, ...userWithoutPassword } = user;
-  // ctx.res.cookie('token', token);
+
   cookies.set('token', token, {
     httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
