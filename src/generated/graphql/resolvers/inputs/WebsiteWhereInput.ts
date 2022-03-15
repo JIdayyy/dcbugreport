@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { BugListRelationFilter } from "../inputs/BugListRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { FeatureListRelationFilter } from "../inputs/FeatureListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType("WebsiteWhereInput", {
@@ -65,4 +66,9 @@ export class WebsiteWhereInput {
     nullable: true
   })
   Bug?: BugListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureListRelationFilter, {
+    nullable: true
+  })
+  Feature?: FeatureListRelationFilter | undefined;
 }

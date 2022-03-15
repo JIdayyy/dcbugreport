@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { FeatureCreateNestedManyWithoutWebsiteInput } from "../inputs/FeatureCreateNestedManyWithoutWebsiteInput";
 
 @TypeGraphQL.InputType("WebsiteCreateWithoutBugInput", {
   isAbstract: true
@@ -41,4 +42,9 @@ export class WebsiteCreateWithoutBugInput {
     nullable: true
   })
   updated_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureCreateNestedManyWithoutWebsiteInput, {
+    nullable: true
+  })
+  Feature?: FeatureCreateNestedManyWithoutWebsiteInput | undefined;
 }

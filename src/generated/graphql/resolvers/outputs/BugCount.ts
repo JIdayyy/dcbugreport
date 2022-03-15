@@ -11,4 +11,9 @@ export class BugCount {
     nullable: false
   })
   File!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  comments!: number;
 }

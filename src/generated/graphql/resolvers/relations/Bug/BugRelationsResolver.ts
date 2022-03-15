@@ -1,9 +1,11 @@
 import * as TypeGraphQL from "type-graphql";
 import { Bug } from "../../../models/Bug";
 import { Category } from "../../../models/Category";
+import { Comment } from "../../../models/Comment";
 import { File } from "../../../models/File";
 import { User } from "../../../models/User";
 import { Website } from "../../../models/Website";
+import { BugCommentsArgs } from "./args/BugCommentsArgs";
 import { BugFileArgs } from "./args/BugFileArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
@@ -51,5 +53,16 @@ export class BugRelationsResolver {
         id: bug.id,
       },
     }).Category({});
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [Comment], {
+    nullable: false
+  })
+  async comments(@TypeGraphQL.Root() bug: Bug, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: BugCommentsArgs): Promise<Comment[]> {
+    return getPrismaFromContext(ctx).bug.findUnique({
+      where: {
+        id: bug.id,
+      },
+    }).comments(args);
   }
 }

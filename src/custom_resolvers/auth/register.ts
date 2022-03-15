@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
@@ -20,7 +21,7 @@ export class RegisterResolver {
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: process.env.NODE_ENV === 'production',
     });
-
+    console.log(data, process.env.ACCESS_KEY);
     if (data.secret_key !== process.env.ACCESS_KEY) {
       throw new Error('Invalid secret key');
     }

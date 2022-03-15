@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { CategoryOrderByWithRelationInput } from "../inputs/CategoryOrderByWithRelationInput";
+import { CommentOrderByRelationAggregateInput } from "../inputs/CommentOrderByRelationAggregateInput";
 import { FileOrderByRelationAggregateInput } from "../inputs/FileOrderByRelationAggregateInput";
 import { UserOrderByWithRelationInput } from "../inputs/UserOrderByWithRelationInput";
 import { WebsiteOrderByWithRelationInput } from "../inputs/WebsiteOrderByWithRelationInput";
@@ -77,6 +78,11 @@ export class BugOrderByWithRelationInput {
   })
   websiteId?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  validation_status?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => FileOrderByRelationAggregateInput, {
     nullable: true
   })
@@ -91,4 +97,9 @@ export class BugOrderByWithRelationInput {
     nullable: true
   })
   Category?: CategoryOrderByWithRelationInput | undefined;
+
+  @TypeGraphQL.Field(_type => CommentOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  comments?: CommentOrderByRelationAggregateInput | undefined;
 }

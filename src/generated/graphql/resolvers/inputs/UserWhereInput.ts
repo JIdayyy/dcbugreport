@@ -4,9 +4,12 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { BugListRelationFilter } from "../inputs/BugListRelationFilter";
+import { CommentListRelationFilter } from "../inputs/CommentListRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumRoleNullableListFilter } from "../inputs/EnumRoleNullableListFilter";
+import { FeatureListRelationFilter } from "../inputs/FeatureListRelationFilter";
 import { FileListRelationFilter } from "../inputs/FileListRelationFilter";
+import { NotificationListRelationFilter } from "../inputs/NotificationListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
@@ -88,4 +91,24 @@ export class UserWhereInput {
     nullable: true
   })
   Bug?: BugListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationListRelationFilter, {
+    nullable: true
+  })
+  Notification?: NotificationListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationListRelationFilter, {
+    nullable: true
+  })
+  notifications_sent?: NotificationListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => CommentListRelationFilter, {
+    nullable: true
+  })
+  Comment?: CommentListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureListRelationFilter, {
+    nullable: true
+  })
+  feature?: FeatureListRelationFilter | undefined;
 }

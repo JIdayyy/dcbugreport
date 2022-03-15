@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Bug } from "../models/Bug";
+import { Feature } from "../models/Feature";
 import { WebsiteCount } from "../resolvers/outputs/WebsiteCount";
 
 @TypeGraphQL.ObjectType("Website", {
@@ -45,6 +46,8 @@ export class Website {
   updated_at!: Date;
 
   Bug?: Bug[];
+
+  Feature?: Feature[];
 
   @TypeGraphQL.Field(_type => WebsiteCount, {
     nullable: true

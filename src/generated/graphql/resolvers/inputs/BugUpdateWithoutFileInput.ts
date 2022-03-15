@@ -3,10 +3,12 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { CategoryUpdateOneWithoutBugInput } from "../inputs/CategoryUpdateOneWithoutBugInput";
+import { CommentUpdateManyWithoutBugInput } from "../inputs/CommentUpdateManyWithoutBugInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { EnumBugPriorityFieldUpdateOperationsInput } from "../inputs/EnumBugPriorityFieldUpdateOperationsInput";
 import { EnumBugSeverityFieldUpdateOperationsInput } from "../inputs/EnumBugSeverityFieldUpdateOperationsInput";
 import { EnumBugStatusFieldUpdateOperationsInput } from "../inputs/EnumBugStatusFieldUpdateOperationsInput";
+import { EnumValidationStatusFieldUpdateOperationsInput } from "../inputs/EnumValidationStatusFieldUpdateOperationsInput";
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateOneRequiredWithoutBugInput } from "../inputs/UserUpdateOneRequiredWithoutBugInput";
@@ -61,6 +63,11 @@ export class BugUpdateWithoutFileInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => EnumValidationStatusFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  validation_status?: EnumValidationStatusFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutBugInput, {
     nullable: true
   })
@@ -75,4 +82,9 @@ export class BugUpdateWithoutFileInput {
     nullable: true
   })
   Category?: CategoryUpdateOneWithoutBugInput | undefined;
+
+  @TypeGraphQL.Field(_type => CommentUpdateManyWithoutBugInput, {
+    nullable: true
+  })
+  comments?: CommentUpdateManyWithoutBugInput | undefined;
 }

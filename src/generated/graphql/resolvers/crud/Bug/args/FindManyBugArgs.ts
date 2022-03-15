@@ -35,5 +35,5 @@ export class FindManyBugArgs {
   @TypeGraphQL.Field(_type => [BugScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "title" | "number" | "description" | "status" | "priority" | "severity" | "created_at" | "updated_at" | "userId" | "websiteId" | "categoryId"> | undefined;
+  distinct?: Array<"id" | "title" | "number" | "description" | "status" | "priority" | "severity" | "created_at" | "updated_at" | "userId" | "websiteId" | "validation_status" | "categoryId"> | undefined;
 }

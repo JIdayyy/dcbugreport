@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
+import { PubSubEngine } from 'graphql-subscriptions';
 import { AuthChecker } from 'type-graphql';
 import mobileClientAuthChecker from './mobileClientAuthChecker';
 import clientTypeChecker from './platformTypeChecker';
@@ -10,6 +11,7 @@ const customAuthChecker: AuthChecker<{
   req: Request;
   res: Response;
   prisma: PrismaClient;
+  pubsub: PubSubEngine;
 }> = async ({ context }, roles) => {
   if (
     clientTypeChecker(context.req) === 'web' &&
@@ -28,4 +30,5 @@ const customAuthChecker: AuthChecker<{
   }
   return webClientAuthCheck(context, roles);
 };
+
 export default customAuthChecker;

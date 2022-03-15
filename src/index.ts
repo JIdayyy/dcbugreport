@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
-import dotenv from 'dotenv';
 import { graphqlUploadExpress } from 'graphql-upload';
+import dotenv from 'dotenv';
 import createServer from './server';
-import app from './app';
+
+import app, { httpServer } from './app';
 
 dotenv.config();
 const { PORT } = process.env;
@@ -36,7 +37,7 @@ const { PORT } = process.env;
   };
 
   await new Promise((resolve) =>
-    app.listen(PORT || 4000, () => {
+    httpServer.listen(PORT || 4000, () => {
       resolve(serverStartLogs());
     })
   );

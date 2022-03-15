@@ -3,7 +3,10 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BugOrderByRelationAggregateInput } from "../inputs/BugOrderByRelationAggregateInput";
+import { CommentOrderByRelationAggregateInput } from "../inputs/CommentOrderByRelationAggregateInput";
+import { FeatureOrderByRelationAggregateInput } from "../inputs/FeatureOrderByRelationAggregateInput";
 import { FileOrderByRelationAggregateInput } from "../inputs/FileOrderByRelationAggregateInput";
+import { NotificationOrderByRelationAggregateInput } from "../inputs/NotificationOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("UserOrderByWithRelationInput", {
@@ -69,4 +72,24 @@ export class UserOrderByWithRelationInput {
     nullable: true
   })
   Bug?: BugOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  Notification?: NotificationOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  notifications_sent?: NotificationOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => CommentOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  Comment?: CommentOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  feature?: FeatureOrderByRelationAggregateInput | undefined;
 }
