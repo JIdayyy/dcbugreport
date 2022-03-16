@@ -2,12 +2,14 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { CommentCreateNestedManyWithoutBugInput } from "../inputs/CommentCreateNestedManyWithoutBugInput";
 import { FileCreateNestedManyWithoutBugInput } from "../inputs/FileCreateNestedManyWithoutBugInput";
 import { UserCreateNestedOneWithoutBugInput } from "../inputs/UserCreateNestedOneWithoutBugInput";
 import { WebsiteCreateNestedOneWithoutBugInput } from "../inputs/WebsiteCreateNestedOneWithoutBugInput";
 import { BugPriority } from "../../enums/BugPriority";
 import { BugSeverity } from "../../enums/BugSeverity";
 import { BugStatus } from "../../enums/BugStatus";
+import { ValidationStatus } from "../../enums/ValidationStatus";
 
 @TypeGraphQL.InputType("BugCreateWithoutCategoryInput", {
   isAbstract: true
@@ -58,6 +60,11 @@ export class BugCreateWithoutCategoryInput {
   })
   updated_at?: Date | undefined;
 
+  @TypeGraphQL.Field(_type => ValidationStatus, {
+    nullable: true
+  })
+  validation_status?: "VALIDATED" | "NOT_VALIDATED" | "PENDING" | undefined;
+
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutBugInput, {
     nullable: false
   })
@@ -72,4 +79,9 @@ export class BugCreateWithoutCategoryInput {
     nullable: true
   })
   File?: FileCreateNestedManyWithoutBugInput | undefined;
+
+  @TypeGraphQL.Field(_type => CommentCreateNestedManyWithoutBugInput, {
+    nullable: true
+  })
+  comments?: CommentCreateNestedManyWithoutBugInput | undefined;
 }

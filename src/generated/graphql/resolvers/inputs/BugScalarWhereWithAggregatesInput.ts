@@ -6,6 +6,7 @@ import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFi
 import { EnumBugPriorityWithAggregatesFilter } from "../inputs/EnumBugPriorityWithAggregatesFilter";
 import { EnumBugSeverityWithAggregatesFilter } from "../inputs/EnumBugSeverityWithAggregatesFilter";
 import { EnumBugStatusWithAggregatesFilter } from "../inputs/EnumBugStatusWithAggregatesFilter";
+import { EnumValidationStatusWithAggregatesFilter } from "../inputs/EnumValidationStatusWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
@@ -83,6 +84,11 @@ export class BugScalarWhereWithAggregatesInput {
     nullable: true
   })
   websiteId?: StringWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => EnumValidationStatusWithAggregatesFilter, {
+    nullable: true
+  })
+  validation_status?: EnumValidationStatusWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true

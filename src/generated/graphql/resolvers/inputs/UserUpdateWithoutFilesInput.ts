@@ -4,7 +4,11 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { BugUpdateManyWithoutUserInput } from "../inputs/BugUpdateManyWithoutUserInput";
+import { CommentUpdateManyWithoutUserInput } from "../inputs/CommentUpdateManyWithoutUserInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { FeatureUpdateManyWithoutUserInput } from "../inputs/FeatureUpdateManyWithoutUserInput";
+import { NotificationUpdateManyWithoutSenderInput } from "../inputs/NotificationUpdateManyWithoutSenderInput";
+import { NotificationUpdateManyWithoutUserInput } from "../inputs/NotificationUpdateManyWithoutUserInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateroleInput } from "../inputs/UserUpdateroleInput";
@@ -67,4 +71,24 @@ export class UserUpdateWithoutFilesInput {
     nullable: true
   })
   Bug?: BugUpdateManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  Notification?: NotificationUpdateManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationUpdateManyWithoutSenderInput, {
+    nullable: true
+  })
+  notifications_sent?: NotificationUpdateManyWithoutSenderInput | undefined;
+
+  @TypeGraphQL.Field(_type => CommentUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  Comment?: CommentUpdateManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  feature?: FeatureUpdateManyWithoutUserInput | undefined;
 }

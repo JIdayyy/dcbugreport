@@ -3,10 +3,12 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { CategoryRelationFilter } from "../inputs/CategoryRelationFilter";
+import { CommentListRelationFilter } from "../inputs/CommentListRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumBugPriorityFilter } from "../inputs/EnumBugPriorityFilter";
 import { EnumBugSeverityFilter } from "../inputs/EnumBugSeverityFilter";
 import { EnumBugStatusFilter } from "../inputs/EnumBugStatusFilter";
+import { EnumValidationStatusFilter } from "../inputs/EnumValidationStatusFilter";
 import { FileListRelationFilter } from "../inputs/FileListRelationFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
@@ -98,6 +100,11 @@ export class BugWhereInput {
   })
   websiteId?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => EnumValidationStatusFilter, {
+    nullable: true
+  })
+  validation_status?: EnumValidationStatusFilter | undefined;
+
   @TypeGraphQL.Field(_type => FileListRelationFilter, {
     nullable: true
   })
@@ -112,4 +119,9 @@ export class BugWhereInput {
     nullable: true
   })
   Category?: CategoryRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => CommentListRelationFilter, {
+    nullable: true
+  })
+  comments?: CommentListRelationFilter | undefined;
 }

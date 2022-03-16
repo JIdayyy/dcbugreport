@@ -6,6 +6,7 @@ import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumBugPriorityFilter } from "../inputs/EnumBugPriorityFilter";
 import { EnumBugSeverityFilter } from "../inputs/EnumBugSeverityFilter";
 import { EnumBugStatusFilter } from "../inputs/EnumBugStatusFilter";
+import { EnumValidationStatusFilter } from "../inputs/EnumValidationStatusFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
@@ -83,6 +84,11 @@ export class BugScalarWhereInput {
     nullable: true
   })
   websiteId?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => EnumValidationStatusFilter, {
+    nullable: true
+  })
+  validation_status?: EnumValidationStatusFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true

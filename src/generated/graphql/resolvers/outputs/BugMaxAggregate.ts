@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { BugPriority } from "../../enums/BugPriority";
 import { BugSeverity } from "../../enums/BugSeverity";
 import { BugStatus } from "../../enums/BugStatus";
+import { ValidationStatus } from "../../enums/ValidationStatus";
 
 @TypeGraphQL.ObjectType("BugMaxAggregate", {
   isAbstract: true
@@ -64,6 +65,11 @@ export class BugMaxAggregate {
     nullable: true
   })
   websiteId!: string | null;
+
+  @TypeGraphQL.Field(_type => ValidationStatus, {
+    nullable: true
+  })
+  validation_status!: "VALIDATED" | "NOT_VALIDATED" | "PENDING" | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

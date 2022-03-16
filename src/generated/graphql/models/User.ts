@@ -3,7 +3,10 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Bug } from "../models/Bug";
+import { Comment } from "../models/Comment";
+import { Feature } from "../models/Feature";
 import { File } from "../models/File";
+import { Notification } from "../models/Notification";
 import { Role } from "../enums/Role";
 import { UserCount } from "../resolvers/outputs/UserCount";
 
@@ -64,6 +67,14 @@ export class User {
   updated_at!: Date;
 
   Bug?: Bug[];
+
+  Notification?: Notification[];
+
+  notifications_sent?: Notification[];
+
+  Comment?: Comment[];
+
+  feature?: Feature[];
 
   @TypeGraphQL.Field(_type => UserCount, {
     nullable: true

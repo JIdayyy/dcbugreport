@@ -12,6 +12,7 @@ export enum BugScalarFieldEnum {
   updated_at = "updated_at",
   userId = "userId",
   websiteId = "websiteId",
+  validation_status = "validation_status",
   categoryId = "categoryId"
 }
 TypeGraphQL.registerEnumType(BugScalarFieldEnum, {

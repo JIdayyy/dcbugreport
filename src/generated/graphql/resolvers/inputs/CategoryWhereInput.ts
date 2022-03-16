@@ -5,7 +5,9 @@ import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { BugListRelationFilter } from "../inputs/BugListRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { FeatureListRelationFilter } from "../inputs/FeatureListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @TypeGraphQL.InputType("CategoryWhereInput", {
   isAbstract: true
@@ -60,4 +62,19 @@ export class CategoryWhereInput {
     nullable: true
   })
   Bug?: BugListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  backgroundColor?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  icon?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureListRelationFilter, {
+    nullable: true
+  })
+  Feature?: FeatureListRelationFilter | undefined;
 }

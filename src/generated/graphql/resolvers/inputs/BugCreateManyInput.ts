@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { BugPriority } from "../../enums/BugPriority";
 import { BugSeverity } from "../../enums/BugSeverity";
 import { BugStatus } from "../../enums/BugStatus";
+import { ValidationStatus } from "../../enums/ValidationStatus";
 
 @TypeGraphQL.InputType("BugCreateManyInput", {
   isAbstract: true
@@ -64,6 +65,11 @@ export class BugCreateManyInput {
     nullable: false
   })
   websiteId!: string;
+
+  @TypeGraphQL.Field(_type => ValidationStatus, {
+    nullable: true
+  })
+  validation_status?: "VALIDATED" | "NOT_VALIDATED" | "PENDING" | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

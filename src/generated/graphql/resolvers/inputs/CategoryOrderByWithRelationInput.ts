@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BugOrderByRelationAggregateInput } from "../inputs/BugOrderByRelationAggregateInput";
+import { FeatureOrderByRelationAggregateInput } from "../inputs/FeatureOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("CategoryOrderByWithRelationInput", {
@@ -43,4 +44,19 @@ export class CategoryOrderByWithRelationInput {
     nullable: true
   })
   Bug?: BugOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  backgroundColor?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  icon?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  Feature?: FeatureOrderByRelationAggregateInput | undefined;
 }

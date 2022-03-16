@@ -11,4 +11,9 @@ export class CategoryCount {
     nullable: false
   })
   Bug!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  Feature!: number;
 }

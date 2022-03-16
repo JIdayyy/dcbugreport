@@ -16,18 +16,52 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  first_name  String
-  last_name   String
-  email       String   @unique
-  password    String
+  id                 String         @id @default(uuid())
+  first_name         String
+  last_name          String
+  email              String         @unique
+  password           String
+  is_disabled        Boolean
+  files              File[]
+  avatar             String?
+  role               Role[]
+  created_at         DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
+  Bug                Bug[]
+  Notification       Notification[]
+  notifications_sent Notification[] @relation("notification_sender")
+  Comment            Comment[]
+  feature            Feature[]
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  text       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  fileId     String
+  Feature    Feature? @relation(fields: [featureId], references: [id])
+  featureId  String?
+  Bug        Bug?     @relation(fields: [bugId], references: [id])
+  bugId      String?
+}
+
+model Feature {
+  id          String    @id @default(uuid())
+  name        String
+  description String
   is_disabled Boolean
-  files       File[]
-  avatar      String?
-  role        Role[]
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  Bug         Bug[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  website     Website   @relation(fields: [websiteId], references: [id])
+  websiteId   String
+  comments    Comment[]
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  User        User?     @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 model File {
@@ -46,43 +80,88 @@ model File {
 }
 
 model Category {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  is_disabled Boolean
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  Bug         Bug[]
+  id              String    @id @default(uuid())
+  name            String
+  description     String
+  is_disabled     Boolean
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+  Bug             Bug[]
+  backgroundColor String?
+  icon            String?
+  Feature         Feature[]
 }
 
 model Bug {
-  id          String      @id @default(uuid())
+  id                String           @id @default(uuid())
+  title             String
+  number            Int              @default(autoincrement())
+  description       String
+  status            BugStatus        @default(OPEN)
+  priority          BugPriority      @default(MEDIUM)
+  severity          BugSeverity
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  user              User             @relation(fields: [userId], references: [id])
+  userId            String
+  Website           Website          @relation(fields: [websiteId], references: [id])
+  websiteId         String
+  validation_status ValidationStatus @default(NOT_VALIDATED)
+  File              File[]
+  categoryId        String?
+  Category          Category?        @relation(fields: [categoryId], references: [id])
+  comments          Comment[]
+}
+
+model Notification {
+  id          String               @id @default(uuid())
   title       String
-  number      Int         @default(autoincrement())
   description String
-  status      BugStatus   @default(OPEN)
-  priority    BugPriority @default(MEDIUM)
-  severity    BugSeverity
-  created_at  DateTime    @default(now())
-  updated_at  DateTime    @updatedAt
-  user        User        @relation(fields: [userId], references: [id])
+  isRead      Boolean              @default(false)
+  is_disabled Boolean
+  created_at  DateTime             @default(now())
+  updated_at  DateTime             @updatedAt
+  user        User                 @relation(fields: [userId], references: [id])
   userId      String
-  Website     Website     @relation(fields: [websiteId], references: [id])
-  websiteId   String
-  File        File[]
-  categoryId  String?
-  Category    Category?   @relation(fields: [categoryId], references: [id])
+  sender      User                 @relation("notification_sender", fields: [senderId], references: [id])
+  senderId    String
+  bugId       String?
+  topics      NotificationTopics[]
 }
 
 model Website {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   name       String
   url        String
   logo       String
   isPreview  Boolean
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
   Bug        Bug[]
+  Feature    Feature[]
+}
+
+enum NotificationTopics {
+  NEW_BUG
+  NEW_FEATURE
+  NEW_FILE
+  NEW_COMMENT
+  NEW_REVIEW
+  NEW_REPLY
+  BUG_CLOSED
+  FEATURE_CLOSED
+  FILE_UPLOADED
+  WEBSITE_ADDED
+  WEBSITE_REMOVED
+  WEBSITE_UPDATED
+  NEW_USER
+  OTHER
+}
+
+enum ValidationStatus {
+  VALIDATED
+  NOT_VALIDATED
+  PENDING
 }
 
 enum Role {

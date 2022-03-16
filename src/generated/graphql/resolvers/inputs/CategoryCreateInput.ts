@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BugCreateNestedManyWithoutCategoryInput } from "../inputs/BugCreateNestedManyWithoutCategoryInput";
+import { FeatureCreateNestedManyWithoutCategoryInput } from "../inputs/FeatureCreateNestedManyWithoutCategoryInput";
 
 @TypeGraphQL.InputType("CategoryCreateInput", {
   isAbstract: true
@@ -38,8 +39,23 @@ export class CategoryCreateInput {
   })
   updated_at?: Date | undefined;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  backgroundColor?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  icon?: string | undefined;
+
   @TypeGraphQL.Field(_type => BugCreateNestedManyWithoutCategoryInput, {
     nullable: true
   })
   Bug?: BugCreateNestedManyWithoutCategoryInput | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureCreateNestedManyWithoutCategoryInput, {
+    nullable: true
+  })
+  Feature?: FeatureCreateNestedManyWithoutCategoryInput | undefined;
 }

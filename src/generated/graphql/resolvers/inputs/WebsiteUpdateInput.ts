@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { BugUpdateManyWithoutWebsiteInput } from "../inputs/BugUpdateManyWithoutWebsiteInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { FeatureUpdateManyWithoutWebsiteInput } from "../inputs/FeatureUpdateManyWithoutWebsiteInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("WebsiteUpdateInput", {
@@ -50,4 +51,9 @@ export class WebsiteUpdateInput {
     nullable: true
   })
   Bug?: BugUpdateManyWithoutWebsiteInput | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureUpdateManyWithoutWebsiteInput, {
+    nullable: true
+  })
+  Feature?: FeatureUpdateManyWithoutWebsiteInput | undefined;
 }

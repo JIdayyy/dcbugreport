@@ -3,7 +3,11 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BugCreateNestedManyWithoutUserInput } from "../inputs/BugCreateNestedManyWithoutUserInput";
+import { CommentCreateNestedManyWithoutUserInput } from "../inputs/CommentCreateNestedManyWithoutUserInput";
+import { FeatureCreateNestedManyWithoutUserInput } from "../inputs/FeatureCreateNestedManyWithoutUserInput";
 import { FileCreateNestedManyWithoutUserInput } from "../inputs/FileCreateNestedManyWithoutUserInput";
+import { NotificationCreateNestedManyWithoutSenderInput } from "../inputs/NotificationCreateNestedManyWithoutSenderInput";
+import { NotificationCreateNestedManyWithoutUserInput } from "../inputs/NotificationCreateNestedManyWithoutUserInput";
 import { UserCreateroleInput } from "../inputs/UserCreateroleInput";
 
 @TypeGraphQL.InputType("UserCreateInput", {
@@ -69,4 +73,24 @@ export class UserCreateInput {
     nullable: true
   })
   Bug?: BugCreateNestedManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  Notification?: NotificationCreateNestedManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => NotificationCreateNestedManyWithoutSenderInput, {
+    nullable: true
+  })
+  notifications_sent?: NotificationCreateNestedManyWithoutSenderInput | undefined;
+
+  @TypeGraphQL.Field(_type => CommentCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  Comment?: CommentCreateNestedManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  feature?: FeatureCreateNestedManyWithoutUserInput | undefined;
 }

@@ -10,6 +10,7 @@ import { BugSumAggregate } from "../outputs/BugSumAggregate";
 import { BugPriority } from "../../enums/BugPriority";
 import { BugSeverity } from "../../enums/BugSeverity";
 import { BugStatus } from "../../enums/BugStatus";
+import { ValidationStatus } from "../../enums/ValidationStatus";
 
 @TypeGraphQL.ObjectType("BugGroupBy", {
   isAbstract: true
@@ -69,6 +70,11 @@ export class BugGroupBy {
     nullable: false
   })
   websiteId!: string;
+
+  @TypeGraphQL.Field(_type => ValidationStatus, {
+    nullable: false
+  })
+  validation_status!: "VALIDATED" | "NOT_VALIDATED" | "PENDING";
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

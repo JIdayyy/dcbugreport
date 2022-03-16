@@ -40,6 +40,16 @@ export class CategoryGroupBy {
   })
   updated_at!: Date;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  backgroundColor!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  icon!: string | null;
+
   @TypeGraphQL.Field(_type => CategoryCountAggregate, {
     nullable: true
   })

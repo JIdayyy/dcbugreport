@@ -3,12 +3,14 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Category } from "../models/Category";
+import { Comment } from "../models/Comment";
 import { File } from "../models/File";
 import { User } from "../models/User";
 import { Website } from "../models/Website";
 import { BugPriority } from "../enums/BugPriority";
 import { BugSeverity } from "../enums/BugSeverity";
 import { BugStatus } from "../enums/BugStatus";
+import { ValidationStatus } from "../enums/ValidationStatus";
 import { BugCount } from "../resolvers/outputs/BugCount";
 
 @TypeGraphQL.ObjectType("Bug", {
@@ -74,6 +76,11 @@ export class Bug {
   })
   websiteId!: string;
 
+  @TypeGraphQL.Field(_type => ValidationStatus, {
+    nullable: false
+  })
+  validation_status!: "VALIDATED" | "NOT_VALIDATED" | "PENDING";
+
   File?: File[];
 
   @TypeGraphQL.Field(_type => String, {
@@ -82,6 +89,8 @@ export class Bug {
   categoryId?: string | null;
 
   Category?: Category | null;
+
+  comments?: Comment[];
 
   @TypeGraphQL.Field(_type => BugCount, {
     nullable: true
