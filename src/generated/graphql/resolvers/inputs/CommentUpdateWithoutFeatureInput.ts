@@ -31,15 +31,15 @@ export class CommentUpdateWithoutFeatureInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  fileId?: StringFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutCommentInput, {
     nullable: true
   })
   user?: UserUpdateOneRequiredWithoutCommentInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  fileId?: StringFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => BugUpdateOneWithoutCommentsInput, {
     nullable: true

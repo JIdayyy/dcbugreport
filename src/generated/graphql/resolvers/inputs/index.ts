@@ -267,7 +267,6 @@ export { NotificationCreateManySenderInput } from "./NotificationCreateManySende
 export { NotificationCreateManySenderInputEnvelope } from "./NotificationCreateManySenderInputEnvelope";
 export { NotificationCreateManyUserInput } from "./NotificationCreateManyUserInput";
 export { NotificationCreateManyUserInputEnvelope } from "./NotificationCreateManyUserInputEnvelope";
-export { NotificationCreateManytopicsInput } from "./NotificationCreateManytopicsInput";
 export { NotificationCreateNestedManyWithoutSenderInput } from "./NotificationCreateNestedManyWithoutSenderInput";
 export { NotificationCreateNestedManyWithoutUserInput } from "./NotificationCreateNestedManyWithoutUserInput";
 export { NotificationCreateOrConnectWithoutSenderInput } from "./NotificationCreateOrConnectWithoutSenderInput";
@@ -307,7 +306,6 @@ export { StringWithAggregatesFilter } from "./StringWithAggregatesFilter";
 export { UserCountOrderByAggregateInput } from "./UserCountOrderByAggregateInput";
 export { UserCreateInput } from "./UserCreateInput";
 export { UserCreateManyInput } from "./UserCreateManyInput";
-export { UserCreateManyroleInput } from "./UserCreateManyroleInput";
 export { UserCreateNestedOneWithoutBugInput } from "./UserCreateNestedOneWithoutBugInput";
 export { UserCreateNestedOneWithoutCommentInput } from "./UserCreateNestedOneWithoutCommentInput";
 export { UserCreateNestedOneWithoutFeatureInput } from "./UserCreateNestedOneWithoutFeatureInput";

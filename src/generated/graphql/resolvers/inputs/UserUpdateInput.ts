@@ -48,10 +48,20 @@ export class UserUpdateInput {
   })
   is_disabled?: BoolFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => FileUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  files?: FileUpdateManyWithoutUserInput | undefined;
+
   @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
     nullable: true
   })
   avatar?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpdateroleInput, {
+    nullable: true
+  })
+  role?: UserUpdateroleInput | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
@@ -62,16 +72,6 @@ export class UserUpdateInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateroleInput, {
-    nullable: true
-  })
-  role?: UserUpdateroleInput | undefined;
-
-  @TypeGraphQL.Field(_type => FileUpdateManyWithoutUserInput, {
-    nullable: true
-  })
-  files?: FileUpdateManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => BugUpdateManyWithoutUserInput, {
     nullable: true

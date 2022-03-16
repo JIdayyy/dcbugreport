@@ -39,6 +39,11 @@ export class CategoryCreateInput {
   })
   updated_at?: Date | undefined;
 
+  @TypeGraphQL.Field(_type => BugCreateNestedManyWithoutCategoryInput, {
+    nullable: true
+  })
+  Bug?: BugCreateNestedManyWithoutCategoryInput | undefined;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
@@ -48,11 +53,6 @@ export class CategoryCreateInput {
     nullable: true
   })
   icon?: string | undefined;
-
-  @TypeGraphQL.Field(_type => BugCreateNestedManyWithoutCategoryInput, {
-    nullable: true
-  })
-  Bug?: BugCreateNestedManyWithoutCategoryInput | undefined;
 
   @TypeGraphQL.Field(_type => FeatureCreateNestedManyWithoutCategoryInput, {
     nullable: true

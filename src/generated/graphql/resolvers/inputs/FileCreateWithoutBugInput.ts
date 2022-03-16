@@ -33,6 +33,11 @@ export class FileCreateWithoutBugInput {
   })
   type!: string;
 
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutFilesInput, {
+    nullable: false
+  })
+  user!: UserCreateNestedOneWithoutFilesInput;
+
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: false
   })
@@ -47,9 +52,4 @@ export class FileCreateWithoutBugInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutFilesInput, {
-    nullable: false
-  })
-  user!: UserCreateNestedOneWithoutFilesInput;
 }

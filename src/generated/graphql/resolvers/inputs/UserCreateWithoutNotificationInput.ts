@@ -43,10 +43,20 @@ export class UserCreateWithoutNotificationInput {
   })
   is_disabled!: boolean;
 
+  @TypeGraphQL.Field(_type => FileCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  files?: FileCreateNestedManyWithoutUserInput | undefined;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   avatar?: string | undefined;
+
+  @TypeGraphQL.Field(_type => UserCreateroleInput, {
+    nullable: true
+  })
+  role?: UserCreateroleInput | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
@@ -57,16 +67,6 @@ export class UserCreateWithoutNotificationInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateroleInput, {
-    nullable: true
-  })
-  role?: UserCreateroleInput | undefined;
-
-  @TypeGraphQL.Field(_type => FileCreateNestedManyWithoutUserInput, {
-    nullable: true
-  })
-  files?: FileCreateNestedManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => BugCreateNestedManyWithoutUserInput, {
     nullable: true

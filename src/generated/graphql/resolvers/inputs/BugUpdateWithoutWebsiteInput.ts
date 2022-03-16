@@ -63,15 +63,15 @@ export class BugUpdateWithoutWebsiteInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => EnumValidationStatusFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  validation_status?: EnumValidationStatusFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutBugInput, {
     nullable: true
   })
   user?: UserUpdateOneRequiredWithoutBugInput | undefined;
+
+  @TypeGraphQL.Field(_type => EnumValidationStatusFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  validation_status?: EnumValidationStatusFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => FileUpdateManyWithoutBugInput, {
     nullable: true

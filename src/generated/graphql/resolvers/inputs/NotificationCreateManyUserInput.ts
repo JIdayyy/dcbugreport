@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { NotificationCreateManytopicsInput } from "../inputs/NotificationCreateManytopicsInput";
+import { NotificationCreatetopicsInput } from "../inputs/NotificationCreatetopicsInput";
 
 @TypeGraphQL.InputType("NotificationCreateManyUserInput", {
   isAbstract: true
@@ -53,8 +53,8 @@ export class NotificationCreateManyUserInput {
   })
   bugId?: string | undefined;
 
-  @TypeGraphQL.Field(_type => NotificationCreateManytopicsInput, {
+  @TypeGraphQL.Field(_type => NotificationCreatetopicsInput, {
     nullable: true
   })
-  topics?: NotificationCreateManytopicsInput | undefined;
+  topics?: NotificationCreatetopicsInput | undefined;
 }
