@@ -64,11 +64,6 @@ export class BugUpdateInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => EnumValidationStatusFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  validation_status?: EnumValidationStatusFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutBugInput, {
     nullable: true
   })
@@ -78,6 +73,11 @@ export class BugUpdateInput {
     nullable: true
   })
   Website?: WebsiteUpdateOneRequiredWithoutBugInput | undefined;
+
+  @TypeGraphQL.Field(_type => EnumValidationStatusFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  validation_status?: EnumValidationStatusFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => FileUpdateManyWithoutBugInput, {
     nullable: true

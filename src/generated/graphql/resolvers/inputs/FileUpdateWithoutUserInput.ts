@@ -37,6 +37,11 @@ export class FileUpdateWithoutUserInput {
   })
   type?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => BugUpdateOneRequiredWithoutFileInput, {
+    nullable: true
+  })
+  bug?: BugUpdateOneRequiredWithoutFileInput | undefined;
+
   @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -51,9 +56,4 @@ export class FileUpdateWithoutUserInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => BugUpdateOneRequiredWithoutFileInput, {
-    nullable: true
-  })
-  bug?: BugUpdateOneRequiredWithoutFileInput | undefined;
 }

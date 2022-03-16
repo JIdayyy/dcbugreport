@@ -60,15 +60,15 @@ export class BugCreateWithoutUserInput {
   })
   updated_at?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => ValidationStatus, {
-    nullable: true
-  })
-  validation_status?: "VALIDATED" | "NOT_VALIDATED" | "PENDING" | undefined;
-
   @TypeGraphQL.Field(_type => WebsiteCreateNestedOneWithoutBugInput, {
     nullable: false
   })
   Website!: WebsiteCreateNestedOneWithoutBugInput;
+
+  @TypeGraphQL.Field(_type => ValidationStatus, {
+    nullable: true
+  })
+  validation_status?: "VALIDATED" | "NOT_VALIDATED" | "PENDING" | undefined;
 
   @TypeGraphQL.Field(_type => FileCreateNestedManyWithoutBugInput, {
     nullable: true

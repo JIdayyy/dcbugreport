@@ -42,6 +42,11 @@ export class CategoryUpdateWithoutFeatureInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => BugUpdateManyWithoutCategoryInput, {
+    nullable: true
+  })
+  Bug?: BugUpdateManyWithoutCategoryInput | undefined;
+
   @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -51,9 +56,4 @@ export class CategoryUpdateWithoutFeatureInput {
     nullable: true
   })
   icon?: NullableStringFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => BugUpdateManyWithoutCategoryInput, {
-    nullable: true
-  })
-  Bug?: BugUpdateManyWithoutCategoryInput | undefined;
 }

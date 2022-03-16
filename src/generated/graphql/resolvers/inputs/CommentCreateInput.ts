@@ -30,15 +30,15 @@ export class CommentCreateInput {
   })
   updated_at?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  fileId!: string;
-
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutCommentInput, {
     nullable: false
   })
   user!: UserCreateNestedOneWithoutCommentInput;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  fileId!: string;
 
   @TypeGraphQL.Field(_type => FeatureCreateNestedOneWithoutCommentsInput, {
     nullable: true

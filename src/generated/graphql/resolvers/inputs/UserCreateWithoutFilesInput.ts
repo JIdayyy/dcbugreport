@@ -48,6 +48,11 @@ export class UserCreateWithoutFilesInput {
   })
   avatar?: string | undefined;
 
+  @TypeGraphQL.Field(_type => UserCreateroleInput, {
+    nullable: true
+  })
+  role?: UserCreateroleInput | undefined;
+
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })
@@ -57,11 +62,6 @@ export class UserCreateWithoutFilesInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateroleInput, {
-    nullable: true
-  })
-  role?: UserCreateroleInput | undefined;
 
   @TypeGraphQL.Field(_type => BugCreateNestedManyWithoutUserInput, {
     nullable: true
