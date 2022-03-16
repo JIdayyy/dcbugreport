@@ -36,4 +36,14 @@ export class CategoryMinAggregate {
     nullable: true
   })
   updated_at!: Date | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  backgroundColor!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  icon!: string | null;
 }

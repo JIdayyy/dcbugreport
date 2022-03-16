@@ -20,7 +20,7 @@ export class GroupByCategoryArgs {
   @TypeGraphQL.Field(_type => [CategoryScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "name" | "description" | "is_disabled" | "created_at" | "updated_at">;
+  by!: Array<"id" | "name" | "description" | "is_disabled" | "created_at" | "updated_at" | "backgroundColor" | "icon">;
 
   @TypeGraphQL.Field(_type => CategoryScalarWhereWithAggregatesInput, {
     nullable: true

@@ -5,6 +5,8 @@ import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { BugUpdateManyWithoutCategoryInput } from "../inputs/BugUpdateManyWithoutCategoryInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { FeatureUpdateManyWithoutCategoryInput } from "../inputs/FeatureUpdateManyWithoutCategoryInput";
+import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("CategoryUpdateInput", {
@@ -41,8 +43,23 @@ export class CategoryUpdateInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  backgroundColor?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  icon?: NullableStringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => BugUpdateManyWithoutCategoryInput, {
     nullable: true
   })
   Bug?: BugUpdateManyWithoutCategoryInput | undefined;
+
+  @TypeGraphQL.Field(_type => FeatureUpdateManyWithoutCategoryInput, {
+    nullable: true
+  })
+  Feature?: FeatureUpdateManyWithoutCategoryInput | undefined;
 }

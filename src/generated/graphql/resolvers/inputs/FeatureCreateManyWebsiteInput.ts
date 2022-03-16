@@ -38,6 +38,11 @@ export class FeatureCreateManyWebsiteInput {
   updated_at?: Date | undefined;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  categoryId!: string;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   userId?: string | undefined;

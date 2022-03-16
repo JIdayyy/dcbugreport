@@ -84,6 +84,7 @@ export class SampleResolver {
           title: `${ctx.user.first_name} ${ctx.user.last_name} has sent you a notifcation`,
           userId,
           senderId,
+          topics: ['NEW_BUG'],
           is_disabled: false,
         },
       })

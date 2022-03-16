@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
+import { CategoryUpdateOneRequiredWithoutFeatureInput } from "../inputs/CategoryUpdateOneRequiredWithoutFeatureInput";
 import { CommentUpdateManyWithoutFeatureInput } from "../inputs/CommentUpdateManyWithoutFeatureInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
@@ -52,6 +53,11 @@ export class FeatureUpdateInput {
     nullable: true
   })
   comments?: CommentUpdateManyWithoutFeatureInput | undefined;
+
+  @TypeGraphQL.Field(_type => CategoryUpdateOneRequiredWithoutFeatureInput, {
+    nullable: true
+  })
+  category?: CategoryUpdateOneRequiredWithoutFeatureInput | undefined;
 
   @TypeGraphQL.Field(_type => UserUpdateOneWithoutFeatureInput, {
     nullable: true

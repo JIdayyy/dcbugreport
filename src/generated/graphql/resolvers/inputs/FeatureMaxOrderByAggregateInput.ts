@@ -46,5 +46,10 @@ export class FeatureMaxOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  categoryId?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   userId?: "asc" | "desc" | undefined;
 }

@@ -35,5 +35,5 @@ export class UserNotifications_sentArgs {
   @TypeGraphQL.Field(_type => [NotificationScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "title" | "description" | "is_disabled" | "created_at" | "updated_at" | "userId" | "senderId" | "bugId" | "topics"> | undefined;
+  distinct?: Array<"id" | "title" | "description" | "isRead" | "is_disabled" | "created_at" | "updated_at" | "userId" | "senderId" | "bugId" | "topics"> | undefined;
 }

@@ -1,4 +1,5 @@
 import * as TypeGraphQL from "type-graphql";
+import { Category } from "../../../models/Category";
 import { Comment } from "../../../models/Comment";
 import { Feature } from "../../../models/Feature";
 import { User } from "../../../models/User";
@@ -28,6 +29,17 @@ export class FeatureRelationsResolver {
         id: feature.id,
       },
     }).comments(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => Category, {
+    nullable: false
+  })
+  async category(@TypeGraphQL.Root() feature: Feature, @TypeGraphQL.Ctx() ctx: any): Promise<Category> {
+    return getPrismaFromContext(ctx).feature.findUnique({
+      where: {
+        id: feature.id,
+      },
+    }).category({});
   }
 
   @TypeGraphQL.FieldResolver(_type => User, {

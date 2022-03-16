@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
+import { Category } from "../models/Category";
 import { Comment } from "../models/Comment";
 import { User } from "../models/User";
 import { Website } from "../models/Website";
@@ -49,6 +50,13 @@ export class Feature {
   websiteId!: string;
 
   comments?: Comment[];
+
+  category?: Category;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  categoryId!: string;
 
   User?: User | null;
 

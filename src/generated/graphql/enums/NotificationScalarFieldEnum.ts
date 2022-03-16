@@ -4,6 +4,7 @@ export enum NotificationScalarFieldEnum {
   id = "id",
   title = "title",
   description = "description",
+  isRead = "isRead",
   is_disabled = "is_disabled",
   created_at = "created_at",
   updated_at = "updated_at",

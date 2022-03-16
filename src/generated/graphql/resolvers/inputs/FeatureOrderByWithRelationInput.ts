@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { CategoryOrderByWithRelationInput } from "../inputs/CategoryOrderByWithRelationInput";
 import { CommentOrderByRelationAggregateInput } from "../inputs/CommentOrderByRelationAggregateInput";
 import { UserOrderByWithRelationInput } from "../inputs/UserOrderByWithRelationInput";
 import { WebsiteOrderByWithRelationInput } from "../inputs/WebsiteOrderByWithRelationInput";
@@ -55,6 +56,16 @@ export class FeatureOrderByWithRelationInput {
     nullable: true
   })
   comments?: CommentOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => CategoryOrderByWithRelationInput, {
+    nullable: true
+  })
+  category?: CategoryOrderByWithRelationInput | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  categoryId?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => UserOrderByWithRelationInput, {
     nullable: true

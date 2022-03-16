@@ -58,6 +58,8 @@ model Feature {
   website     Website   @relation(fields: [websiteId], references: [id])
   websiteId   String
   comments    Comment[]
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
   User        User?     @relation(fields: [userId], references: [id])
   userId      String?
 }
@@ -78,13 +80,16 @@ model File {
 }
 
 model Category {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  is_disabled Boolean
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  Bug         Bug[]
+  id              String    @id @default(uuid())
+  name            String
+  description     String
+  is_disabled     Boolean
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+  Bug             Bug[]
+  backgroundColor String?
+  icon            String?
+  Feature         Feature[]
 }
 
 model Bug {
@@ -112,6 +117,7 @@ model Notification {
   id          String               @id @default(uuid())
   title       String
   description String
+  isRead      Boolean              @default(false)
   is_disabled Boolean
   created_at  DateTime             @default(now())
   updated_at  DateTime             @updatedAt

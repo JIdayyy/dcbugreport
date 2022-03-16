@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Bug } from "../models/Bug";
+import { Feature } from "../models/Feature";
 import { CategoryCount } from "../resolvers/outputs/CategoryCount";
 
 @TypeGraphQL.ObjectType("Category", {
@@ -40,6 +41,18 @@ export class Category {
   updated_at!: Date;
 
   Bug?: Bug[];
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  backgroundColor?: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  icon?: string | null;
+
+  Feature?: Feature[];
 
   @TypeGraphQL.Field(_type => CategoryCount, {
     nullable: true

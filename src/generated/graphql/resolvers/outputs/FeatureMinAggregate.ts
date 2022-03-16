@@ -45,5 +45,10 @@ export class FeatureMinAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
+  categoryId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
   userId!: string | null;
 }

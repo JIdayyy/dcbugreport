@@ -46,6 +46,11 @@ export class FeatureGroupBy {
   websiteId!: string;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  categoryId!: string;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   userId!: string | null;

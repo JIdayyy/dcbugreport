@@ -25,6 +25,11 @@ export class NotificationMaxAggregate {
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true
   })
+  isRead!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
   is_disabled!: boolean | null;
 
   @TypeGraphQL.Field(_type => Date, {

@@ -29,6 +29,11 @@ export class NotificationOrderByWithAggregationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  isRead?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   is_disabled?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {

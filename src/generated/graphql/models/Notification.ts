@@ -27,6 +27,11 @@ export class Notification {
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: false
   })
+  isRead!: boolean;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
   is_disabled!: boolean;
 
   @TypeGraphQL.Field(_type => Date, {

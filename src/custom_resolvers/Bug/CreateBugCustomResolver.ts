@@ -66,7 +66,9 @@ export class CreateBugCustomResolver {
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
-    pubSub.publish('NOTIFICATIONS', payload);
+    if (bug) {
+      await pubSub.publish('NOTIFICATIONS', payload);
+    }
 
     return bug;
   }

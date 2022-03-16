@@ -46,6 +46,11 @@ export class NotificationWhereInput {
   @TypeGraphQL.Field(_type => BoolFilter, {
     nullable: true
   })
+  isRead?: BoolFilter | undefined;
+
+  @TypeGraphQL.Field(_type => BoolFilter, {
+    nullable: true
+  })
   is_disabled?: BoolFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
