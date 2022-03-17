@@ -32,7 +32,7 @@ const customCreateServer = async () => {
 
   const wsServer = new WebSocketServer({
     server: httpServer,
-    path: '/graphql',
+    path: '/websocket',
   });
 
   const schema = await buildSchema({
