@@ -46,12 +46,14 @@ export class UploadFile {
     if (!file || !link) {
       throw new Error('Error');
     }
+    const fileType = file.result.name.split('.');
+
     const newFile = await ctx.prisma.file.create({
       data: {
         name: filename,
         path: link.result.url,
-        size: 2,
-        type: 'test',
+        size: file.result.size,
+        type: fileType[fileType.length - 1],
         is_disabled: false,
         user: {
           connect: {
