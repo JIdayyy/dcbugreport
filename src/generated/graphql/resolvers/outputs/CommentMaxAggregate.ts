@@ -35,11 +35,6 @@ export class CommentMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  fileId!: string | null;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true
-  })
   featureId!: string | null;
 
   @TypeGraphQL.Field(_type => String, {

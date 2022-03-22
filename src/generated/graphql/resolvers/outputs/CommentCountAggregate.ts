@@ -35,11 +35,6 @@ export class CommentCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
-  fileId!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
   featureId!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

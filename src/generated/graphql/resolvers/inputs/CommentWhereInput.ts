@@ -58,11 +58,6 @@ export class CommentWhereInput {
   })
   userId?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true
-  })
-  fileId?: StringFilter | undefined;
-
   @TypeGraphQL.Field(_type => FeatureRelationFilter, {
     nullable: true
   })

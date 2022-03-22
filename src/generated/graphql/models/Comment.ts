@@ -37,11 +37,6 @@ export class Comment {
   })
   userId!: string;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  fileId!: string;
-
   Feature?: Feature | null;
 
   @TypeGraphQL.Field(_type => String, {

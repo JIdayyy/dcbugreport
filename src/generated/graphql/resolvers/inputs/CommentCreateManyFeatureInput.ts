@@ -33,11 +33,6 @@ export class CommentCreateManyFeatureInput {
   userId!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  fileId!: string;
-
-  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   bugId?: string | undefined;
