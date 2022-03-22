@@ -77,19 +77,6 @@ export class SampleResolver {
       pubsub: PubSubEngine;
     }
   ): NotificationType {
-    const user = ctx.prisma.notification
-      .create({
-        data: {
-          description: message as string,
-          title: `${ctx.user.first_name} ${ctx.user.last_name} has sent you a notifcation`,
-          userId,
-          senderId,
-          topics: ['NEW_BUG'],
-          is_disabled: false,
-        },
-      })
-      .then((r) => console.log(r));
-
     return {
       id: 1,
       date: new Date(),
