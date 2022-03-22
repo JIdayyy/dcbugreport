@@ -50,11 +50,6 @@ export class CommentScalarWhereInput {
   })
   userId?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true
-  })
-  fileId?: StringFilter | undefined;
-
   @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
   })

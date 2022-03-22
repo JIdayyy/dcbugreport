@@ -36,11 +36,6 @@ export class CommentGroupBy {
   userId!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  fileId!: string;
-
-  @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   featureId!: string | null;

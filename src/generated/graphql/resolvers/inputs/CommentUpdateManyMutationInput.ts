@@ -28,9 +28,4 @@ export class CommentUpdateManyMutationInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  fileId?: StringFieldUpdateOperationsInput | undefined;
 }

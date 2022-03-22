@@ -6,7 +6,6 @@ export enum CommentScalarFieldEnum {
   created_at = "created_at",
   updated_at = "updated_at",
   userId = "userId",
-  fileId = "fileId",
   featureId = "featureId",
   bugId = "bugId"
 }

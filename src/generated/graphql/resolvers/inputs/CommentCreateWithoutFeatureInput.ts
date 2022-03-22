@@ -34,11 +34,6 @@ export class CommentCreateWithoutFeatureInput {
   })
   user!: UserCreateNestedOneWithoutCommentInput;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  fileId!: string;
-
   @TypeGraphQL.Field(_type => BugCreateNestedOneWithoutCommentsInput, {
     nullable: true
   })

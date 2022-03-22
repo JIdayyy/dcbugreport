@@ -41,11 +41,6 @@ export class CommentOrderByWithRelationInput {
   })
   userId?: "asc" | "desc" | undefined;
 
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
-  fileId?: "asc" | "desc" | undefined;
-
   @TypeGraphQL.Field(_type => FeatureOrderByWithRelationInput, {
     nullable: true
   })

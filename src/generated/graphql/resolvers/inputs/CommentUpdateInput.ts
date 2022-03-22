@@ -37,11 +37,6 @@ export class CommentUpdateInput {
   })
   user?: UserUpdateOneRequiredWithoutCommentInput | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  fileId?: StringFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => FeatureUpdateOneWithoutCommentsInput, {
     nullable: true
   })
