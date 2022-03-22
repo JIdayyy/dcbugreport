@@ -8,7 +8,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { JwtPayload, verify } from 'jsonwebtoken';
 import Cookies from 'cookies';
-import { PrismaClient } from '@prisma/client';
+import { NotificationTopics, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { CreateBugArgs } from '../../generated/graphql/resolvers/crud/Bug/args';
 import { Bug } from '../../generated/graphql/models/Bug';
@@ -31,12 +31,14 @@ export class CreateBugCustomResolver {
       req: Request;
       res: Response;
       pubsub: PubSubEngine;
+      user: JwtPayload;
     },
     @TypeGraphQL.Info() info: GraphQLResolveInfo,
     @TypeGraphQL.Args() args: CreateBugArgs,
     @PubSub() pubSub: PubSubEngine
   ): Promise<Bug> {
     const { _count } = transformFields(graphqlFields(info as any));
+
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: true,
     });
@@ -61,6 +63,20 @@ export class CreateBugCustomResolver {
       userId: user.id,
       message: `${user.first_name} ${user.last_name} has created a new bug on ${websiteFromPrisma.name}`,
     };
+    const users = await ctx.prisma.user.findMany();
+
+    const allNewNotifications = users.map((usr) => ({
+      description: payload.message as string,
+      title: payload.message as string,
+      userId: usr.id,
+      senderId: user.id,
+      topics: ['NEW_BUG'] as NotificationTopics[],
+      is_disabled: false,
+    }));
+
+    const allNotifications = await ctx.prisma.notification.createMany({
+      data: allNewNotifications,
+    });
 
     const bug = await getPrismaFromContext(ctx).bug.create({
       ...args,
