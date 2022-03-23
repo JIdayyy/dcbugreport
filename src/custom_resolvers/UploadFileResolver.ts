@@ -73,6 +73,7 @@ export class UploadFile {
 
       return newFile;
     } catch (error) {
+      console.log(error);
       throw new ApolloError('error during upload', error as string);
     }
   }
