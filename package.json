@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.3.2",
-    "@prisma/client": "3.10.0",
+    "@prisma/client": "3.11.0",
     "@types/express": "^4.17.13",
     "@types/graphql-fields": "^1.3.4",
     "@types/jsonwebtoken": "^8.5.6",
@@ -48,7 +48,7 @@
     "minio": "^7.0.26",
     "multer": "^1.4.4",
     "npm": "^8.5.4",
-    "prisma": "3.10.0",
+    "prisma": "3.11.0",
     "reflect-metadata": "^0.1.13",
     "stream-promise": "^3.2.0",
     "ts-jest": "^27.0.7",
