@@ -12,7 +12,7 @@ import { File, Role } from '../generated/graphql';
 const minioClient = new Minio.Client({
   endPoint: 'minio-dc-s3.digitalcopilote.re',
   port: 80,
-  useSSL: process.env.NODE_ENV === 'production',
+  useSSL: false,
   accessKey: 'DigitalCopilote1337',
   secretKey: 'DigitalCopilote1337',
 });
@@ -56,7 +56,7 @@ export class UploadFile {
           name: filename,
           path: `https://minio-dc-s3.digitalcopilote.re/dcreport/${filename}`,
           size: 1,
-          type: 'test',
+          type: filename.split('.')[filename.length - 1],
           is_disabled: false,
           user: {
             connect: {
@@ -73,7 +73,7 @@ export class UploadFile {
 
       return newFile;
     } catch (error) {
-      throw new ApolloError('error during upload');
+      throw new ApolloError('error during upload', error as string);
     }
   }
 }
