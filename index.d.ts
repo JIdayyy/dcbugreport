@@ -1,4 +1,5 @@
-import { PrismaClient, PrismaPromise } from ".prisma/client";
+/* eslint-disable import/no-extraneous-dependencies */
+import { PrismaClient, PrismaPromise } from '.prisma/client';
 
 interface ApiError {
   message: string;
@@ -15,3 +16,5 @@ type Query<T, T2> = (
 interface Queries<T, T2> {
   [name: string]: Query<T, T2>;
 }
+
+declare module 'file-metadata';
