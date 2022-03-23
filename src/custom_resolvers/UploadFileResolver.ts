@@ -51,12 +51,17 @@ export class UploadFile {
         metadata
       );
 
+      const getFileType = (name) => {
+        const splited = name.split('.');
+        return splited[splited.length - 1] || 'unknown';
+      };
+
       const newFile = await ctx.prisma.file.create({
         data: {
           name: filename,
           path: `https://minio-dc-s3.digitalcopilote.re/dcreport/${filename}`,
           size: 1,
-          type: filename.split('.')[filename.length - 1] || 'unknown',
+          type: getFileType(filename),
           is_disabled: false,
           user: {
             connect: {
