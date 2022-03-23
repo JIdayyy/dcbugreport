@@ -56,7 +56,7 @@ export class UploadFile {
           name: filename,
           path: `https://minio-dc-s3.digitalcopilote.re/dcreport/${filename}`,
           size: 1,
-          type: filename.split('.')[filename.length - 1],
+          type: filename.split('.')[filename.length - 1] || 'unknown',
           is_disabled: false,
           user: {
             connect: {
