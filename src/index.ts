@@ -22,8 +22,8 @@ const { PORT } = process.env;
     cors: {
       origin:
         process.env.NODE_ENV === 'production'
-          ? process.env.CLIENT_URL
-          : 'http://localhost:3000',
+          ? [process.env.CLIENT_URL] as string[]
+          : ['http://localhost:3000','http://localhost:3001'],
       credentials: true,
       exposedHeaders: ['x-authorization'],
     },
