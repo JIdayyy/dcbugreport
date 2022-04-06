@@ -7,7 +7,7 @@ import * as Minio from 'minio';
 import { ApolloError } from 'apollo-server-core';
 import { Request } from 'express';
 import { PrismaClient } from '.prisma/client';
-import { File, Role } from '../generated/graphql';
+import { File, Role } from '../../generated/graphql';
 
 const minioClient = new Minio.Client({
   endPoint: 'minio-dc-s3.digitalcopilote.re',
