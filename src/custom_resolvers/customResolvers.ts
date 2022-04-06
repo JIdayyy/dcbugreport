@@ -1,5 +1,5 @@
 import { NonEmptyArray } from 'type-graphql';
-import * as AuthResolvers from './Authentification/index';
+import * as AuthResolvers from './Authentication';
 import * as UploadFileResolver from './Upload';
 
 // export * from './Auth';

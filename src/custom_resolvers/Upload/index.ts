@@ -1,2 +1,2 @@
 export { UploadFile } from './UploadFileResolver';
-export { LoginResolver } from '../Authentification';
+export { LoginResolver } from '../Authentication/index';
