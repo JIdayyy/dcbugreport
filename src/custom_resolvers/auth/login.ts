@@ -11,6 +11,10 @@ import { UserWithoutCountAndPassword } from '../models/register';
 import { LoginInput } from '../models/login';
 import { NotificationPayload } from '../models/notification';
 
+export interface TEST {
+  test: string;
+}
+
 @Resolver()
 export class LoginResolver {
   @Mutation(() => User)
