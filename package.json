@@ -11,7 +11,7 @@
     "start": "node ./dist/src/index.js",
     "seed": "npx prisma migrate reset && ts-node prisma/seed.ts",
     "build": "npx prisma generate && tsc",
-    "deploy": " npm run build && node --trace-warning ./dist/src/index.js",
+    "deploy": " npm run build && node --trace-warnings ./dist/src/index.js",
     "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
     "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
     "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f",
