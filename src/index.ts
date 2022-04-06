@@ -19,14 +19,7 @@ const { PORT } = process.env;
 
   server.applyMiddleware({
     app,
-    cors: {
-      origin:
-        process.env.NODE_ENV === 'production'
-          ? [process.env.CLIENT_URL] as string[]
-          : ['http://localhost:3000','http://localhost:3001'],
-      credentials: true,
-      exposedHeaders: ['x-authorization'],
-    },
+    cors: false,
   });
 
   const serverStartLogs = () => {
