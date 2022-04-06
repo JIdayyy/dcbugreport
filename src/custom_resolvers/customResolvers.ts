@@ -1,19 +1,19 @@
 import { NonEmptyArray } from 'type-graphql';
-import * as AuthResolvers from './Auth';
+// import * as AuthResolvers from './Auth';
 import * as UploadFileResolver from './Upload';
 
-export * from './Auth';
-export * from './Upload';
+// export * from './Auth';
+// export * from './Upload';
 
-const CustomAuthResolvers = Object.values(
-  AuthResolvers
-) as unknown as NonEmptyArray<Function>;
+// const CustomAuthResolvers = Object.values(
+//   AuthResolvers
+// ) as unknown as NonEmptyArray<Function>;
 
 const CustomUploadResolvers = Object.values(
   UploadFileResolver
 ) as unknown as NonEmptyArray<Function>;
 
 export const customResolvers = [
-  ...CustomAuthResolvers,
+  // ...CustomAuthResolvers,
   ...CustomUploadResolvers,
 ] as unknown as NonEmptyArray<Function>;
