@@ -1,21 +1,13 @@
 import express from 'express';
-
 import cors from 'cors';
 import { createServer } from 'http';
+import corsOptions from './utils/corsOptions';
 
 const app = express();
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin:
-      process.env.NODE_ENV === 'production'
-        ? [process.env.CLIENT_URL] as string[]
-        : ['http://localhost:3000','http://localhost:3001'],
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => res.status(200).send('Hello World'));
 

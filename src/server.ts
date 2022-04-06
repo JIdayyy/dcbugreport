@@ -16,14 +16,12 @@ import { verify } from 'jsonwebtoken';
 import { resolvers } from './generated/graphql';
 import prisma from '../prisma/prismaClient';
 import customAuthChecker from './utils/customAuthChecker';
-import { RegisterResolver } from './custom_resolvers/auth/register';
-import { LoginResolver } from './custom_resolvers/auth/login';
 import { Resolve } from './authConfig';
-import { MeResolver } from './custom_resolvers/auth/me';
-import { UploadFile } from './custom_resolvers/UploadFileResolver';
+import { UploadFile } from './custom_resolvers/Upload/UploadFileResolver';
 import { CreateBugCustomResolver } from './custom_resolvers/Bug/CreateBugCustomResolver';
 import { SampleResolver } from './custom_resolvers/subscriptions/newBugSubscription';
 import { httpServer } from './app';
+import { customResolvers } from './custom_resolvers/customResolvers';
 
 const pubsub = new PubSub();
 
@@ -38,9 +36,7 @@ const customCreateServer = async () => {
   const schema = await buildSchema({
     resolvers: [
       ...resolvers,
-      RegisterResolver,
-      LoginResolver,
-      MeResolver,
+      ...customResolvers,
       UploadFile,
       CreateBugCustomResolver,
       SampleResolver,
