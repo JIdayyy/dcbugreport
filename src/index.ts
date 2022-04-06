@@ -7,6 +7,9 @@ import createServer from './server';
 import app, { httpServer } from './app';
 
 dotenv.config();
+
+process.on('warning', (e) => console.warn(e.stack));
+
 const { PORT } = process.env;
 
 (async () => {
