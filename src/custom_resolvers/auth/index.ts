@@ -1,4 +1,4 @@
-export { LoginResolver } from './login';
-export { LogoutResolver } from './logout';
-export { MeResolver } from './me';
-export { RegisterResolver } from './register';
+export * from './login';
+export * from './logout';
+export * from './me';
+export * from './register';
