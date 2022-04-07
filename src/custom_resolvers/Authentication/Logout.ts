@@ -10,8 +10,10 @@ export class LogoutResolver {
   async logout(
     @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response }
   ): Promise<String> {
-    const cookies = new Cookies(ctx.req, ctx.res);
+    const cookies = new Cookies(ctx.req, ctx.res, {
+      secure: process.env.NODE_ENV === 'production',
+    });
     cookies.set('token', '');
-      return 'User successfully logged out';
+    return 'User successfully logged out';
   }
 }
