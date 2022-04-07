@@ -20,7 +20,7 @@ services:
     environment:
       ADMINER_DESIGN: mvt
 
-  ytask:
+  dcreport:
     build:
       context: ./
     ports:
