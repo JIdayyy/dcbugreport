@@ -9,7 +9,6 @@ import platformTypeChecker from '../../utils/platformTypeChecker';
 import loginAuthorizationHeader from '../../utils/loginAuthorisationHeader';
 import { UserWithoutCountAndPassword } from '../models/register';
 import { LoginInput } from '../models/login';
-import { NotificationPayload } from '../models/notification';
 
 @Resolver()
 export class LoginResolver {
@@ -24,14 +23,6 @@ export class LoginResolver {
     },
     @Arg('data') data: LoginInput
   ): Promise<UserWithoutCountAndPassword> {
-    const payload: NotificationPayload = {
-      senderId: '1',
-      userId: '1',
-      message: 'tz',
-    };
-
-    ctx.pubsub.publish('NOTIFICATIONS', payload);
-
     if (platformTypeChecker(ctx.req) === 'web') {
       return loginJWTCookies(ctx, data);
     }
