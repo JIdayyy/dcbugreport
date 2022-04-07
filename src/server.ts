@@ -5,27 +5,21 @@ import {
   ApolloServerPluginLandingPageDisabled,
   ApolloServerPluginDrainHttpServer,
 } from 'apollo-server-core';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { WebSocketServer } from 'ws';
 import { buildSchema } from 'type-graphql';
 import { useServer } from 'graphql-ws/lib/use/ws';
-import { PubSub } from 'graphql-subscriptions';
-import Cookies from 'cookies';
-import { Response } from 'express';
-import { verify } from 'jsonwebtoken';
 import { resolvers } from './generated/graphql';
-import prisma from '../prisma/prismaClient';
 import customAuthChecker from './utils/customAuthChecker';
 import { Resolve } from './authConfig';
-import { UploadFile } from './custom_resolvers/Upload/UploadFileResolver';
 import { CreateBugCustomResolver } from './custom_resolvers/Bug/CreateBugCustomResolver';
 import { SampleResolver } from './custom_resolvers/subscriptions/newBugSubscription';
 import { httpServer } from './app';
 import { customResolvers } from './custom_resolvers/customResolvers';
-
-const pubsub = new PubSub();
+import { graphQLContext, webSocketContext } from './services/context';
 
 const customCreateServer = async () => {
+  // The Resolve function is called before the server starts.
+  // It is used to apply middleware with enhance map functions
   Resolve();
 
   const wsServer = new WebSocketServer({
@@ -37,7 +31,6 @@ const customCreateServer = async () => {
     resolvers: [
       ...resolvers,
       ...customResolvers,
-      UploadFile,
       CreateBugCustomResolver,
       SampleResolver,
     ],
@@ -49,27 +42,14 @@ const customCreateServer = async () => {
   const serverCleanup = useServer(
     {
       schema,
-      context: async (ctx, msg, args) => {
-        const cookies = new Cookies(
-          ctx.extra.request,
-          {} as unknown as Response
-        );
-        const token = cookies.get('token');
-        const user = verify(token!, process.env.JWT_SECRET as string);
-
-        if (typeof user === 'string') {
-          throw new Error('User not logged in');
-        }
-        return { ctx, msg, args, prisma, user };
-      },
+      context: (ctx, msg, args) => webSocketContext(ctx, msg, args),
     },
     wsServer
   );
 
   const server = new ApolloServer({
     schema,
-
-    context: async ({ req, res }) => ({ prisma, req, res, pubsub }),
+    context: async ({ req, res }) => graphQLContext({ req, res }),
 
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
