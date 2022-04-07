@@ -2,9 +2,6 @@ import { NonEmptyArray } from 'type-graphql';
 import * as AuthResolvers from './Authentication';
 import * as UploadFileResolver from './Upload';
 
-// export * from './Auth';
-// export * from './Upload';
-
 const CustomAuthResolvers = Object.values(
   AuthResolvers
 ) as unknown as NonEmptyArray<Function>;

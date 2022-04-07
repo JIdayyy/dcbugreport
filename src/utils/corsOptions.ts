@@ -1,5 +1,4 @@
 const whitelistedUrls = process.env.CLIENTS_URLS?.split(',') || [];
-console.log(whitelistedUrls);
 
 const corsOptions = {
   origin: (

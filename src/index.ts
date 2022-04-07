@@ -3,7 +3,6 @@ import 'reflect-metadata';
 import { graphqlUploadExpress } from 'graphql-upload';
 import dotenv from 'dotenv';
 import createServer from './server';
-
 import app, { httpServer } from './app';
 
 dotenv.config();

@@ -7,14 +7,17 @@ import * as Minio from 'minio';
 import { ApolloError } from 'apollo-server-core';
 import { Request } from 'express';
 import { PrismaClient } from '.prisma/client';
+import getFileType from '../../utils/getFileType';
 import { File, Role } from '../../generated/graphql';
+
+const { MINIO_USERNAME, MINIO_PASSWORD } = process.env;
 
 const minioClient = new Minio.Client({
   endPoint: 'minio-dc-s3.digitalcopilote.re',
   port: 80,
   useSSL: false,
-  accessKey: 'DigitalCopilote1337',
-  secretKey: 'DigitalCopilote1337',
+  accessKey: MINIO_USERNAME as string,
+  secretKey: MINIO_PASSWORD as string,
 });
 
 export interface Upload {
@@ -50,11 +53,6 @@ export class UploadFile {
         stream as Readable,
         metadata
       );
-
-      const getFileType = (name) => {
-        const splited = name.split('.');
-        return splited[splited.length - 1] || 'unknown';
-      };
 
       const newFile = await ctx.prisma.file.create({
         data: {
