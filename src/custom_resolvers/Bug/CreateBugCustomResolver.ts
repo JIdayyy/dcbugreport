@@ -63,6 +63,7 @@ export class CreateBugCustomResolver {
       userId: user.id,
       message: `${user.first_name} ${user.last_name} has created a new bug on ${websiteFromPrisma.name}`,
     };
+
     const users = await ctx.prisma.user.findMany();
 
     const allNewNotifications = users.map((usr) => ({

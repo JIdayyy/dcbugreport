@@ -4,7 +4,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import * as TypeGraphQL from 'type-graphql';
-
 import { PubSubEngine } from 'graphql-subscriptions';
 import {
   Resolver,
@@ -21,7 +20,6 @@ import {
 
 import { User } from 'src/generated/graphql';
 import { NotificationType, NotificationPayload } from '../models/notification';
-import prismaClient from '../../../prisma/prismaClient';
 
 @Resolver((_of) => NotificationType)
 export class SampleResolver {
@@ -61,10 +59,7 @@ export class SampleResolver {
 
   @Subscription({
     topics: 'NOTIFICATIONS',
-    filter: ({ context }: any) =>
-      // context undefined here
-
-      true,
+    filter: ({ context }: any) => true,
   })
   normalSubscription(
     @Root() { senderId, userId, message }: NotificationPayload,
@@ -77,6 +72,7 @@ export class SampleResolver {
       pubsub: PubSubEngine;
     }
   ): NotificationType {
+    console.log(ctx);
     return {
       id: 1,
       date: new Date(),
