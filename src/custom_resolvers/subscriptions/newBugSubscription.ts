@@ -72,7 +72,6 @@ export class SampleResolver {
       pubsub: PubSubEngine;
     }
   ): NotificationType {
-    console.log(ctx);
     return {
       id: 1,
       date: new Date(),
