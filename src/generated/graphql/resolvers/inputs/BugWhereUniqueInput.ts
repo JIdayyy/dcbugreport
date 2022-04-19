@@ -11,4 +11,9 @@ export class BugWhereUniqueInput {
     nullable: true
   })
   id?: string | undefined;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  number?: number | undefined;
 }
