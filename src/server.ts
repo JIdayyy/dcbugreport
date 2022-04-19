@@ -10,12 +10,11 @@ import { buildSchema } from 'type-graphql';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { resolvers } from './generated/graphql';
 import customAuthChecker from './utils/customAuthChecker';
-import { Resolve } from './authConfig';
-import { CreateBugCustomResolver } from './custom_resolvers/Bug/CreateBugCustomResolver';
+import { Resolve } from './config/authentication.config';
 import { SampleResolver } from './custom_resolvers/subscriptions/newBugSubscription';
 import { httpServer } from './app';
 import { customResolvers } from './custom_resolvers/customResolvers';
-import { graphQLContext, webSocketContext } from './services/context';
+import { graphQLContext, webSocketContext } from './context/context';
 
 const customCreateServer = async () => {
   // The Resolve function is called before the server starts.
@@ -28,12 +27,7 @@ const customCreateServer = async () => {
   });
 
   const schema = await buildSchema({
-    resolvers: [
-      ...resolvers,
-      ...customResolvers,
-      CreateBugCustomResolver,
-      SampleResolver,
-    ],
+    resolvers: [...resolvers, ...customResolvers, SampleResolver],
     validate: false,
 
     authChecker: customAuthChecker,

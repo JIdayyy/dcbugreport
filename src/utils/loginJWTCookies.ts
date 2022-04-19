@@ -1,17 +1,13 @@
-import { sign } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import Cookies from 'cookies';
 import { LoginInput } from 'src/custom_resolvers/models/login';
-import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { GQLContext } from 'src/interfaces';
 
-const loginJWTCookies = async (
-  ctx: { prisma: PrismaClient; req: Request; res: Response },
-  data: LoginInput
-) => {
-  const cookies = new Cookies(ctx.req, ctx.res, {
-    secure: process.env.NODE_ENV === 'production',
-  });
+import {
+  checkPassword,
+  setCookieToken,
+  signToken,
+} from '../services/authentication';
+
+const loginJWTCookies = async (ctx: GQLContext, data: LoginInput) => {
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
@@ -19,34 +15,14 @@ const loginJWTCookies = async (
   });
 
   if (!user) throw new Error("User doesn't exist");
-  if (!bcrypt.compareSync(data.password, user.password)) {
-    ctx.res.cookie('token', '');
-    throw new Error('Invalid password');
-  }
 
-  const token = sign(
-    {
-      email: user.email,
-      id: user.id,
-      role: user.role,
-      first_name: user.first_name,
-      last_name: user.last_name,
-    },
-    process.env.JWT_SECRET as string,
-    {
-      expiresIn: '1d',
-    }
-  );
+  checkPassword(data.password, user.password, ctx);
+
+  const token = signToken(user);
 
   const { password, ...userWithoutPassword } = user;
 
-  cookies.set('token', token, {
-    httpOnly: process.env.NODE_ENV === 'production',
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  });
-
-  ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
+  setCookieToken(token, ctx);
 
   return userWithoutPassword;
 };
