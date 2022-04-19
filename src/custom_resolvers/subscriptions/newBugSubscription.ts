@@ -18,7 +18,7 @@ import {
   Ctx,
 } from 'type-graphql';
 
-import { User } from 'src/generated/graphql';
+import { User } from '../../generated/graphql';
 import { NotificationType, NotificationPayload } from '../models/notification';
 
 @Resolver((_of) => NotificationType)

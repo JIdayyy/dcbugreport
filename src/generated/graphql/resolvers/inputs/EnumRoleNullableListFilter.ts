@@ -11,22 +11,22 @@ export class EnumRoleNullableListFilter {
   @TypeGraphQL.Field(_type => [Role], {
     nullable: true
   })
-  equals?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER"> | undefined;
+  equals?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET"> | undefined;
 
   @TypeGraphQL.Field(_type => Role, {
     nullable: true
   })
-  has?: "SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | undefined;
+  has?: "SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET" | undefined;
 
   @TypeGraphQL.Field(_type => [Role], {
     nullable: true
   })
-  hasEvery?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER"> | undefined;
+  hasEvery?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET"> | undefined;
 
   @TypeGraphQL.Field(_type => [Role], {
     nullable: true
   })
-  hasSome?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER"> | undefined;
+  hasSome?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET"> | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true

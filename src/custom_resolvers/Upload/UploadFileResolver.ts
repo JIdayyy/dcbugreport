@@ -37,7 +37,7 @@ export class UploadFile {
     @Ctx() ctx: { prisma: PrismaClient; req: Request },
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: Upload
-  ): Promise<File | undefined> {
+  ): Promise<File> {
     const { userId, bugId, size } = ctx.req.query;
 
     const stream = createReadStream();

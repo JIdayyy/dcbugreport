@@ -15,7 +15,7 @@ const loginAuthorizationHeader = async (
 
   if (!user) throw new Error("User doesn't exist");
   if (!bcrypt.compareSync(data.password, user.password)) {
-    ctx.res.setHeader('x-Authorization', ``);
+    ctx.res.setHeader('x-Authorization', '');
     throw new Error('Invalid password');
   }
 

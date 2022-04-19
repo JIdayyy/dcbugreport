@@ -19,7 +19,6 @@ export class MeResolver {
         secure: true,
       });
       const token = cookies.get('token');
-      console.log('token', token);
 
       if (!token) throw new Error('User not logged in');
 
@@ -27,8 +26,6 @@ export class MeResolver {
         token,
         process.env.JWT_SECRET as string
       ) as JwtPayload;
-
-      console.log('ici', user);
 
       const prismaUser = await ctx.prisma.user.findUnique({
         where: {

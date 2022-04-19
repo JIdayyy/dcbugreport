@@ -49,7 +49,7 @@ export class UserGroupBy {
   @TypeGraphQL.Field(_type => [Role], {
     nullable: true
   })
-  role!: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER"> | null;
+  role!: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET"> | null;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: false

@@ -11,5 +11,5 @@ export class UserCreateroleInput {
   @TypeGraphQL.Field(_type => [Role], {
     nullable: false
   })
-  set!: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER">;
+  set!: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET">;
 }

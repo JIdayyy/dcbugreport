@@ -9,7 +9,7 @@ export class LogoutResolver {
   @Mutation(() => String)
   async logout(
     @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response }
-  ): Promise<String> {
+  ): Promise<string> {
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: process.env.NODE_ENV === 'production',
     });

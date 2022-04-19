@@ -54,7 +54,7 @@ export class User {
   @TypeGraphQL.Field(_type => [Role], {
     nullable: false
   })
-  role!: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER">;
+  role!: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET">;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
