@@ -9,14 +9,14 @@ import { JwtPayload, verify } from 'jsonwebtoken';
 import { Arg, Args, PubSub } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { Bug } from '../../generated/graphql/models/Bug';
+import { Bug } from '../../../generated/graphql/models/Bug';
 import {
   transformFields,
   getPrismaFromContext,
   transformCountFieldIntoSelectRelationsCount,
-} from '../../generated/graphql/helpers';
-import CloseBugArgs from '../Args/closeBugArgs';
-import { NotificationPayload } from '../models/notification';
+} from '../../../generated/graphql/helpers';
+import CloseBugArgs from '../../Args/closeBugArgs';
+import { NotificationPayload } from '../../models/notification';
 
 @TypeGraphQL.Resolver((_of) => Bug)
 export class CloseBugCustomResolver {

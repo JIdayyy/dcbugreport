@@ -10,14 +10,14 @@ import { JwtPayload, verify } from 'jsonwebtoken';
 import Cookies from 'cookies';
 import { NotificationTopics, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { CreateBugArgs } from '../../generated/graphql/resolvers/crud/Bug/args';
-import { Bug } from '../../generated/graphql/models/Bug';
+import { CreateBugArgs } from '../../../generated/graphql/resolvers/crud/Bug/args';
+import { Bug } from '../../../generated/graphql/models/Bug';
 import {
   transformFields,
   getPrismaFromContext,
   transformCountFieldIntoSelectRelationsCount,
-} from '../../generated/graphql/helpers';
-import { NotificationPayload } from '../models/notification';
+} from '../../../generated/graphql/helpers';
+import { NotificationPayload } from '../../models/notification';
 
 @TypeGraphQL.Resolver((_of) => Bug)
 export class CreateBugCustomResolver {

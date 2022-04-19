@@ -6,8 +6,11 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import { sign } from 'jsonwebtoken';
-import { User } from '../../generated/graphql/models/User';
-import { RegisterInput, UserWithoutCountAndPassword } from '../models/register';
+import { User } from '../../../generated/graphql/models/User';
+import {
+  RegisterInput,
+  UserWithoutCountAndPassword,
+} from '../../models/register';
 
 @Resolver()
 export class RegisterResolver {
