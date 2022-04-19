@@ -1,3 +1,4 @@
+import { UserWithoutCountAndPassword } from '@/custom_resolvers/models/register';
 import { LoginInput } from 'src/custom_resolvers/models/login';
 import { GQLContext } from 'src/interfaces';
 
@@ -10,7 +11,7 @@ import {
 const loginJWTCookies = async (
   ctx: GQLContext,
   data: LoginInput
-): Promise<UserWithoutPassword> => {
+): Promise<UserWithoutCountAndPassword> => {
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
