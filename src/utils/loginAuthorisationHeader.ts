@@ -2,11 +2,12 @@ import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
+import { LoginInput } from '@/custom_resolvers/models/login';
 
 const loginAuthorizationHeader = async (
   ctx: { prisma: PrismaClient; req: Request; res: Response },
-  data
-) => {
+  data: LoginInput
+): Promise<UserWithoutPassword> => {
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,

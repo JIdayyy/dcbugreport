@@ -26,7 +26,7 @@ export class SampleResolver {
   private autoIncrement = 0;
 
   @Query((returns) => Date)
-  currentDate() {
+  currentDate(): Date {
     return new Date();
   }
 
@@ -59,6 +59,7 @@ export class SampleResolver {
 
   @Subscription({
     topics: 'NOTIFICATIONS',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     filter: ({ context }: any) => true,
   })
   normalSubscription(
@@ -86,7 +87,7 @@ export class SampleResolver {
   })
   subscriptionWithFilter(
     @Root() { senderId, userId, message }: NotificationPayload
-  ) {
+  ): NotificationType {
     const newNotification: NotificationType = {
       id: +userId,
       message,

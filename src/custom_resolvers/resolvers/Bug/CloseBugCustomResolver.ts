@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import * as TypeGraphQL from 'type-graphql';
@@ -36,6 +35,7 @@ export class CloseBugCustomResolver {
     @Args() args: CloseBugArgs,
     @PubSub() pubSub: PubSubEngine
   ): Promise<Bug | null> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
 
     const bug = await getPrismaFromContext(ctx).bug.update({
