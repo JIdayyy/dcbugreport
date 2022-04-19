@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import { sign } from 'jsonwebtoken';
-import { User } from '../../generated/graphql/models/User';
-import { RegisterInput, UserWithoutCountAndPassword } from '../models/register';
+import { User } from '../../../generated/graphql/models/User';
+import {
+  RegisterInput,
+  UserWithoutCountAndPassword,
+} from '../../models/register';
 
 @Resolver()
 export class RegisterResolver {

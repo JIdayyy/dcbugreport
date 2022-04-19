@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import * as TypeGraphQL from 'type-graphql';
@@ -9,14 +8,14 @@ import { JwtPayload, verify } from 'jsonwebtoken';
 import { Arg, Args, PubSub } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { Bug } from '../../generated/graphql/models/Bug';
+import { Bug } from '../../../generated/graphql/models/Bug';
 import {
   transformFields,
   getPrismaFromContext,
   transformCountFieldIntoSelectRelationsCount,
-} from '../../generated/graphql/helpers';
-import CloseBugArgs from '../Args/closeBugArgs';
-import { NotificationPayload } from '../models/notification';
+} from '../../../generated/graphql/helpers';
+import CloseBugArgs from '../../Args/closeBugArgs';
+import { NotificationPayload } from '../../models/notification';
 
 @TypeGraphQL.Resolver((_of) => Bug)
 export class CloseBugCustomResolver {
@@ -36,6 +35,7 @@ export class CloseBugCustomResolver {
     @Args() args: CloseBugArgs,
     @PubSub() pubSub: PubSubEngine
   ): Promise<Bug | null> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
 
     const bug = await getPrismaFromContext(ctx).bug.update({

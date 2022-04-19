@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import * as TypeGraphQL from 'type-graphql';
@@ -10,14 +9,15 @@ import { JwtPayload, verify } from 'jsonwebtoken';
 import Cookies from 'cookies';
 import { NotificationTopics, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { CreateBugArgs } from '../../generated/graphql/resolvers/crud/Bug/args';
-import { Bug } from '../../generated/graphql/models/Bug';
+import { CreateBugArgs } from '../../../generated/graphql/resolvers/crud/Bug/args';
+import { Bug } from '../../../generated/graphql/models/Bug';
 import {
   transformFields,
   getPrismaFromContext,
   transformCountFieldIntoSelectRelationsCount,
-} from '../../generated/graphql/helpers';
-import { NotificationPayload } from '../models/notification';
+} from '../../../generated/graphql/helpers';
+import { NotificationPayload } from '../../models/notification';
+import { ApolloError } from 'apollo-server-core';
 
 @TypeGraphQL.Resolver((_of) => Bug)
 export class CreateBugCustomResolver {
@@ -37,6 +37,7 @@ export class CreateBugCustomResolver {
     @TypeGraphQL.Args() args: CreateBugArgs,
     @PubSub() pubSub: PubSubEngine
   ): Promise<Bug> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
 
     const cookies = new Cookies(ctx.req, ctx.res, {
@@ -44,8 +45,11 @@ export class CreateBugCustomResolver {
     });
 
     const token = cookies.get('token');
+    if (!token) {
+      throw new ApolloError('No token found in cookies');
+    }
 
-    const user = verify(token!, process.env.JWT_SECRET as string);
+    const user = verify(token, process.env.JWT_SECRET as string);
 
     if (typeof user === 'string') {
       throw new Error('User not logged in');

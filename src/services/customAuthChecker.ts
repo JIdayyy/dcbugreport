@@ -2,10 +2,10 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { AuthChecker } from 'type-graphql';
-import mobileClientAuthChecker from './mobileClientAuthChecker';
-import clientTypeChecker from './platformTypeChecker';
+import mobileClientAuthChecker from '../utils/mobileClientAuthChecker';
+import clientTypeChecker from '../utils/platformTypeChecker';
 
-import webClientAuthCheck from './webClientAuthCheck';
+import webClientAuthCheck from '../utils/webClientAuthCheck';
 
 const customAuthChecker: AuthChecker<{
   req: Request;

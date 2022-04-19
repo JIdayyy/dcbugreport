@@ -22,7 +22,7 @@ export const webSocketContext = async (
   const token = cookies.get('token');
 
   if (token) {
-    const user = verify(token!, process.env.JWT_SECRET as string);
+    const user = verify(token, process.env.JWT_SECRET as string);
     if (typeof user === 'string') {
       throw new Error('User not logged in');
     }
@@ -43,7 +43,7 @@ export const graphQLContext = async ({
   const cookies = new Cookies(req, res);
   const token = cookies.get('token');
   if (token) {
-    const user = verify(token!, process.env.JWT_SECRET as string);
+    const user = verify(token, process.env.JWT_SECRET as string);
 
     if (typeof user === 'string') {
       throw new Error('User not logged in');

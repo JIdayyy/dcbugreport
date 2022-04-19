@@ -1,14 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { PubSubEngine } from 'graphql-subscriptions';
-import { User } from '../../generated/graphql';
-import loginJWTCookies from '../../utils/loginJWTCookies';
-import platformTypeChecker from '../../utils/platformTypeChecker';
-import loginAuthorizationHeader from '../../utils/loginAuthorisationHeader';
-import { UserWithoutCountAndPassword } from '../models/register';
-import { LoginInput } from '../models/login';
+import { User } from '../../../generated/graphql';
+import loginJWTCookies from '../../../utils/loginJWTCookies';
+import platformTypeChecker from '../../../utils/platformTypeChecker';
+import loginAuthorizationHeader from '../../../utils/loginAuthorisationHeader';
+import { UserWithoutCountAndPassword } from '../../models/register';
+import { LoginInput } from '../../models/login';
 
 @Resolver()
 export class LoginResolver {

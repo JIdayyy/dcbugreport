@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
@@ -28,8 +27,8 @@ export interface Upload {
 }
 
 @Resolver()
-export class UploadFile {
-  @Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)
+export class UploadWebsiteLogo {
+  @Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.MANAGER)
   @Mutation(() => File, {
     nullable: false,
   })
@@ -37,7 +36,7 @@ export class UploadFile {
     @Ctx() ctx: { prisma: PrismaClient; req: Request },
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: Upload
-  ): Promise<File | undefined> {
+  ): Promise<File> {
     const { userId, bugId } = ctx.req.query;
 
     const stream = createReadStream();
@@ -57,7 +56,7 @@ export class UploadFile {
       const newFile = await ctx.prisma.file.create({
         data: {
           name: filename,
-          path: `https://minio-dc-s3.digitalcopilote.re/dcreport/${filename}`,
+          path: `https://minio-dc-s3.digitalcopilote.re/websiteslogos/${filename}`,
           size: 1,
           type: getFileType(filename),
           is_disabled: false,

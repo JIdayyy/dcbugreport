@@ -11,10 +11,10 @@ export class UserUpdateroleInput {
   @TypeGraphQL.Field(_type => [Role], {
     nullable: true
   })
-  set?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER"> | undefined;
+  set?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET"> | undefined;
 
   @TypeGraphQL.Field(_type => [Role], {
     nullable: true
   })
-  push?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER"> | undefined;
+  push?: Array<"SUPER_ADMIN" | "ADMIN" | "MANAGER" | "USER" | "WIDGET"> | undefined;
 }
