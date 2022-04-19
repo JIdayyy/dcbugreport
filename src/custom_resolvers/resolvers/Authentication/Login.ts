@@ -26,8 +26,7 @@ export class LoginResolver {
       return loginJWTCookies(ctx, data);
     }
     if (platformTypeChecker(ctx.req) === 'mobile') {
-      const user = await loginAuthorizationHeader(ctx, data);
-      return user;
+      return await loginAuthorizationHeader(ctx, data);
     }
     return loginJWTCookies(ctx, data);
   }
