@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled,
@@ -9,14 +8,14 @@ import { WebSocketServer } from 'ws';
 import { buildSchema } from 'type-graphql';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { resolvers } from './generated/graphql';
-import customAuthChecker from './utils/customAuthChecker';
+import customAuthChecker from './services/customAuthChecker';
 import { Resolve } from './config/authentication.config';
 import { SampleResolver } from './custom_resolvers/subscriptions/newBugSubscription';
 import { httpServer } from './app';
 import { customResolvers } from './custom_resolvers/resolvers/customResolvers';
 import { graphQLContext, webSocketContext } from './context/context';
 
-const customCreateServer = async () => {
+const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   // The Resolve function is called before the server starts.
   // It is used to apply middleware with enhance map functions
   Resolve();

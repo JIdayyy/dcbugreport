@@ -7,7 +7,10 @@ import {
   signToken,
 } from '../services/authentication';
 
-const loginJWTCookies = async (ctx: GQLContext, data: LoginInput) => {
+const loginJWTCookies = async (
+  ctx: GQLContext,
+  data: LoginInput
+): Promise<UserWithoutPassword> => {
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
