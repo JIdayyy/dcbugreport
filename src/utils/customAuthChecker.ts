@@ -14,19 +14,14 @@ const customAuthChecker: AuthChecker<{
   pubsub: PubSubEngine;
 }> = async ({ context }, roles) => {
   const clientType = clientTypeChecker(context.req);
-  if (clientType === 'web' && (await webClientAuthCheck(context, roles))) {
-    return true;
-  }
-  if (
-    clientType === 'mobile' &&
-    (await mobileClientAuthChecker(context, roles))
-  ) {
-    return true;
-  }
-  if (await webClientAuthCheck(context, roles)) {
-    return true;
-  }
-  return webClientAuthCheck(context, roles);
+
+  const authConfig = {
+    web: async () => !!(await webClientAuthCheck(context, roles)),
+    mobile: async () => !!(await mobileClientAuthChecker(context, roles)),
+    undefined: async () => !!(await webClientAuthCheck(context, roles)),
+  };
+
+  return authConfig[clientType]();
 };
 
 export default customAuthChecker;

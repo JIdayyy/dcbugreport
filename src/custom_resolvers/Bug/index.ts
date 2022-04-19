@@ -1,0 +1,1 @@
+export { CloseBugCustomResolver } from './CloseBugCustomResolver';

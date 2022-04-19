@@ -1,47 +1,51 @@
-/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import Cookies from 'cookies';
+import { PubSubEngine } from 'graphql-subscriptions';
 import { sign } from 'jsonwebtoken';
-import { User } from '../../generated/graphql/models/User';
-import { RegisterInput, UserWithoutCountAndPassword } from '../models/register';
+import Cookies from 'cookies';
+import bcrypt from 'bcrypt';
+import { User } from '../../generated/graphql';
+import { UserWithoutCountAndPassword } from '../models/register';
+import { LoginInput } from '../models/login';
 
 @Resolver()
-export class RegisterResolver {
+export class LoginResolver {
   @Mutation(() => User)
-  async register(
-    @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response },
-    @Arg('data') data: RegisterInput
+  async login(
+    @Ctx()
+    ctx: {
+      prisma: PrismaClient;
+      req: Request;
+      res: Response;
+      pubsub: PubSubEngine;
+    },
+    @Arg('data') data: LoginInput
   ): Promise<UserWithoutCountAndPassword> {
-    const hashedPassword = bcrypt.hashSync(data.password, 10);
-
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: process.env.NODE_ENV === 'production',
     });
-
-    if (data.secret_key !== process.env.ACCESS_KEY) {
-      throw new Error('Invalid secret key');
-    }
-
-    const user = await ctx.prisma.user.create({
-      data: {
-        first_name: data.first_name,
-        last_name: data.last_name,
+    const user = await ctx.prisma.user.findUnique({
+      where: {
         email: data.email,
-        password: hashedPassword,
-        is_disabled: false,
-        role: ['USER'],
       },
     });
+
+    if (!user) throw new Error("User doesn't exist");
+
+    if (!bcrypt.compareSync(data.password, user.password)) {
+      ctx.res.cookie('widget-token', '');
+      throw new Error('Invalid password');
+    }
 
     const token = sign(
       {
         email: user.email,
         id: user.id,
         role: user.role,
+        first_name: user.first_name,
+        last_name: user.last_name,
       },
       process.env.JWT_SECRET as string,
       {
@@ -49,13 +53,15 @@ export class RegisterResolver {
       }
     );
 
+    const { password, ...userWithoutPassword } = user;
+
     cookies.set('token', token, {
       httpOnly: process.env.NODE_ENV === 'production',
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     });
 
-    const { password, ...userWithoutPassword } = user;
+    ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     return userWithoutPassword;
   }

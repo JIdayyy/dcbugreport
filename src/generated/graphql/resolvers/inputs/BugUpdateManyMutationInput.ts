@@ -7,7 +7,6 @@ import { EnumBugPriorityFieldUpdateOperationsInput } from "../inputs/EnumBugPrio
 import { EnumBugSeverityFieldUpdateOperationsInput } from "../inputs/EnumBugSeverityFieldUpdateOperationsInput";
 import { EnumBugStatusFieldUpdateOperationsInput } from "../inputs/EnumBugStatusFieldUpdateOperationsInput";
 import { EnumValidationStatusFieldUpdateOperationsInput } from "../inputs/EnumValidationStatusFieldUpdateOperationsInput";
-import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("BugUpdateManyMutationInput", {
@@ -23,11 +22,6 @@ export class BugUpdateManyMutationInput {
     nullable: true
   })
   title?: StringFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  number?: IntFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true

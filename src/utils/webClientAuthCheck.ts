@@ -14,6 +14,7 @@ const webClientAuthCheck = async (
   roles: string[]
 ) => {
   const cookies = new Cookies(context.req, context.res);
+
   const token = context.req.cookies
     ? context.req.cookies.token
     : cookies.get('token');

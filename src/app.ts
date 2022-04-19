@@ -2,11 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import { createServer } from 'http';
 import corsOptions from './utils/corsOptions';
-import limiter from './security/rateLimit';
 
 const app = express();
-
-app.use(limiter);
 
 app.use(express.json());
 

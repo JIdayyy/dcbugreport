@@ -33,12 +33,12 @@ export class UploadFile {
   @Mutation(() => File, {
     nullable: false,
   })
-  async uploadFile(
+  async uploadWebsiteLogo(
     @Ctx() ctx: { prisma: PrismaClient; req: Request },
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: Upload
   ): Promise<File | undefined> {
-    const { userId, bugId, size } = ctx.req.query;
+    const { userId, bugId } = ctx.req.query;
 
     const stream = createReadStream();
 
@@ -58,7 +58,7 @@ export class UploadFile {
         data: {
           name: filename,
           path: `https://minio-dc-s3.digitalcopilote.re/dcreport/${filename}`,
-          size: parseInt(size as string, 10),
+          size: 1,
           type: getFileType(filename),
           is_disabled: false,
           user: {
@@ -76,7 +76,6 @@ export class UploadFile {
 
       return newFile;
     } catch (error) {
-      console.log(error);
       throw new ApolloError('error during upload', error as string);
     }
   }

@@ -10,7 +10,6 @@ import { EnumBugSeverityFieldUpdateOperationsInput } from "../inputs/EnumBugSeve
 import { EnumBugStatusFieldUpdateOperationsInput } from "../inputs/EnumBugStatusFieldUpdateOperationsInput";
 import { EnumValidationStatusFieldUpdateOperationsInput } from "../inputs/EnumValidationStatusFieldUpdateOperationsInput";
 import { FileUpdateManyWithoutBugInput } from "../inputs/FileUpdateManyWithoutBugInput";
-import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateOneRequiredWithoutBugInput } from "../inputs/UserUpdateOneRequiredWithoutBugInput";
 
@@ -27,11 +26,6 @@ export class BugUpdateWithoutWebsiteInput {
     nullable: true
   })
   title?: StringFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  number?: IntFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
