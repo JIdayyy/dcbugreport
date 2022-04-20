@@ -28,7 +28,6 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   const schema = await buildSchema({
     resolvers: [...resolvers, ...customResolvers, SampleResolver],
     validate: false,
-
     authChecker: customAuthChecker,
   });
 
@@ -43,7 +42,6 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => graphQLContext({ req, res }),
-
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       process.env.NODE_ENV === 'production'

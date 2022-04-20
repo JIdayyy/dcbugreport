@@ -22,7 +22,7 @@ const webClientAuthCheck = async (
 
   const user = verify(token, process.env.JWT_SECRET as string) as JwtPayload;
 
-  if (!user) throw new ApolloError('U have to be logged in');
+  if (!user) throw new ApolloError('Invalid token');
 
   if (roles.find((role) => user.role.includes(role))) return true;
 
