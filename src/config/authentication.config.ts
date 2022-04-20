@@ -9,19 +9,28 @@ import {
 
 const resolversEnhanceMap: ResolversEnhanceMap = {
   File: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+  },
+  Comment: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+  },
+  Feature: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+  },
+  Notification: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Bug: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   User: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.MANAGER)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Website: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Category: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
 };
 
