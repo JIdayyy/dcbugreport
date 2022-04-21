@@ -5,11 +5,8 @@ import graphqlFields from 'graphql-fields';
 import { PubSub } from 'type-graphql';
 import { GraphQLResolveInfo } from 'graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
-import { JwtPayload, verify } from 'jsonwebtoken';
-import Cookies from 'cookies';
 import { NotificationTopics, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { CreateBugArgs } from '../../../generated/graphql/resolvers/crud/Bug/args';
 import { Bug } from '../../../generated/graphql/models/Bug';
 import {
   transformFields,
@@ -17,28 +14,42 @@ import {
   transformCountFieldIntoSelectRelationsCount,
 } from '../../../generated/graphql/helpers';
 import { NotificationPayload } from '../../models/notification';
-import { ApolloError } from 'apollo-server-core';
+import { JwtPayload, verify } from 'jsonwebtoken';
+import { CreateBugFromWidgetArgs } from '../../Args/createBugFromWidgetArgs';
 
 @TypeGraphQL.Resolver((_of) => Bug)
-export class CreateBugCustomResolver {
+export class CreateTicketFromWidgetCustomResolver {
   @TypeGraphQL.Mutation((_returns) => Bug, {
     nullable: false,
   })
-  async createBugCustom(
+  async createBugFromWidget(
     @TypeGraphQL.Ctx()
     ctx: {
       prisma: PrismaClient;
       req: Request;
       res: Response;
       pubsub: PubSubEngine;
-      user: JwtPayload;
     },
     @TypeGraphQL.Info() info: GraphQLResolveInfo,
-    @TypeGraphQL.Args() args: CreateBugArgs,
+    @TypeGraphQL.Args() args: CreateBugFromWidgetArgs,
     @PubSub() pubSub: PubSubEngine
   ): Promise<Bug> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
+
+    console.log(ctx.req.headers.authorization);
+
+    const widgetToken = verify(
+      ctx.req.headers.authorization as string,
+      process.env.JWT_SECRET_WIDGET as string
+    ) as JwtPayload;
+
+    const user = await ctx.prisma.user.findUnique({
+      where: {
+        id: widgetToken.id,
+      },
+      rejectOnNotFound: true,
+    });
 
     const websiteFromPrisma = await ctx.prisma.website.findUnique({
       where: {
@@ -49,8 +60,8 @@ export class CreateBugCustomResolver {
 
     const payload: NotificationPayload = {
       senderId: '100_100_1337',
-      userId: ctx.user.id,
-      message: `${ctx.user.first_name} ${ctx.user.last_name} has created a new bug on ${websiteFromPrisma.name}`,
+      userId: user.id,
+      message: `${user.first_name} ${user.last_name} has created a new bug on ${websiteFromPrisma.name}`,
     };
 
     const users = await ctx.prisma.user.findMany();
@@ -59,7 +70,7 @@ export class CreateBugCustomResolver {
       description: payload.message as string,
       title: payload.message as string,
       userId: usr.id,
-      senderId: ctx.user.id,
+      senderId: user.id,
       topics: ['NEW_BUG'] as NotificationTopics[],
       is_disabled: false,
     }));
@@ -69,7 +80,19 @@ export class CreateBugCustomResolver {
     });
 
     const bug = await getPrismaFromContext(ctx).bug.create({
-      ...args,
+      data: {
+        ...args.data,
+        Website: {
+          connect: {
+            id: 'aede2270-c4eb-49d8-a430-d754adfd992b',
+          },
+        },
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
 

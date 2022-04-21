@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';

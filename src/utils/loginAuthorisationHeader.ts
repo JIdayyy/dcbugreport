@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
