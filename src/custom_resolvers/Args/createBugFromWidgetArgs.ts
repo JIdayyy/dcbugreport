@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as TypeGraphQL from 'type-graphql';
 import { CreateBugFromWidgetInputs } from '../Inputs/createBugFromWidgetInputs';
 
