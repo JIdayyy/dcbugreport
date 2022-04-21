@@ -13,7 +13,7 @@ const corsOptions = {
     if (whitelistedUrls.indexOf(origin as string) !== -1) {
       return callback(null, true);
     }
-    return callback(new ApolloError('Not allowed by CORS'));
+    return callback(new ApolloError('Not allowed by CORS'), false);
   },
   credentials: true,
 };

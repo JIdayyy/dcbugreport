@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { NonEmptyArray } from 'type-graphql';
 import * as AuthResolvers from './Authentication';
-import * as UploadFileResolver from '../Upload';
+import * as UploadFileResolver from '../resolvers/Upload';
 import * as BugResolvers from './Bug';
 import * as WidgetResolvers from './Widget';
 

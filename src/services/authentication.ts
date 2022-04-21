@@ -24,7 +24,7 @@ export const getWidgetToken = async ({
       id: '100_100_1337',
       websiteId,
       email: 'guest@widget.ts',
-      role: Role.WIDGET,
+      role: [Role.WIDGET],
     },
     process.env.JWT_SECRET_WIDGET as string
   );

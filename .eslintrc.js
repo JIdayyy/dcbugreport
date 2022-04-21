@@ -18,15 +18,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
-    'import/prefer-default-export': 0,
     'class-methods-use-this': 0,
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      { argsIgnorePattern: '^_', ignoreRestSiblings: true },
-    ],
-    'no-console': 1,
   },
   ignorePatterns: [
     '.eslintrc.js',
