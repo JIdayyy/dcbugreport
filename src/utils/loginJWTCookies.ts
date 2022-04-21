@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { UserWithoutCountAndPassword } from '@/custom_resolvers/models/register';
 import { LoginInput } from 'src/custom_resolvers/models/login';
 import { GQLContext } from 'src/interfaces';
