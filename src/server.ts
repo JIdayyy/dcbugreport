@@ -12,7 +12,7 @@ import customAuthChecker from './services/customAuthChecker';
 import { Resolve } from './config/authentication.config';
 import { SampleResolver } from './custom_resolvers/subscriptions/newBugSubscription';
 import { httpServer } from './app';
-import { customResolvers } from './custom_resolvers/resolvers/customResolvers';
+import { customResolvers } from './custom_resolvers/resolvers';
 import { graphQLContext, webSocketContext } from './context/context';
 
 const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {

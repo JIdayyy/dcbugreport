@@ -32,6 +32,8 @@ model User {
   notifications_sent Notification[] @relation("notification_sender")
   Comment            Comment[]
   feature            Feature[]
+  Keys               ApiKey[]
+  secret_key         SecretKey[]
 }
 
 model Comment {
@@ -39,11 +41,11 @@ model Comment {
   text       String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId     String
-  Feature    Feature? @relation(fields: [featureId], references: [id])
+  Feature    Feature? @relation(fields: [featureId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   featureId  String?
-  Bug        Bug?     @relation(fields: [bugId], references: [id])
+  Bug        Bug?     @relation(fields: [bugId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bugId      String?
 }
 
@@ -54,13 +56,14 @@ model Feature {
   is_disabled Boolean
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
-  website     Website   @relation(fields: [websiteId], references: [id])
+  website     Website   @relation(fields: [websiteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   websiteId   String
   comments    Comment[]
-  category    Category  @relation(fields: [categoryId], references: [id])
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   categoryId  String
-  User        User?     @relation(fields: [userId], references: [id])
+  User        User?     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      String?
+  widgetsId   String?
 }
 
 model File {
@@ -69,9 +72,9 @@ model File {
   path        String
   size        Int
   type        String
-  user        User     @relation(fields: [user_id], references: [id])
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   user_id     String
-  bug         Bug      @relation(fields: [bugId], references: [id], onDelete: Cascade)
+  bug         Bug      @relation(fields: [bugId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   is_disabled Boolean
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -101,14 +104,14 @@ model Bug {
   severity          BugSeverity
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
-  user              User             @relation(fields: [userId], references: [id])
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId            String
-  Website           Website          @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+  Website           Website          @relation(fields: [websiteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   websiteId         String
   validation_status ValidationStatus @default(NOT_VALIDATED)
   File              File[]
   categoryId        String?
-  Category          Category?        @relation(fields: [categoryId], references: [id])
+  Category          Category?        @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   comments          Comment[]
 }
 
@@ -120,24 +123,52 @@ model Notification {
   is_disabled Boolean
   created_at  DateTime             @default(now())
   updated_at  DateTime             @updatedAt
-  user        User                 @relation(fields: [userId], references: [id])
+  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      String
-  sender      User                 @relation("notification_sender", fields: [senderId], references: [id])
+  sender      User                 @relation("notification_sender", fields: [senderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   senderId    String
   bugId       String?
   topics      NotificationTopics[]
 }
 
 model Website {
-  id         String    @id @default(uuid())
+  id         String      @id @default(uuid())
   name       String
   url        String
   logo       String
   isPreview  Boolean
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
   Bug        Bug[]
   Feature    Feature[]
+  ApiKey     ApiKey[]
+  secret_key SecretKey[]
+}
+
+model ApiKey {
+  id          String     @id @default(uuid())
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId      String
+  value       String
+  website     Website    @relation(fields: [websiteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  websiteId   String
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  secret_key  SecretKey?
+  secretKeyId String?
+}
+
+model SecretKey {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId     String
+  value      String
+  website    Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  websiteId  String
+  api_key    ApiKey   @relation(fields: [apiKeyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  apiKeyId   String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 enum NotificationTopics {

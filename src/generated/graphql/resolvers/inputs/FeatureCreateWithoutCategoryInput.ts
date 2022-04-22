@@ -54,4 +54,9 @@ export class FeatureCreateWithoutCategoryInput {
     nullable: true
   })
   User?: UserCreateNestedOneWithoutFeatureInput | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  widgetsId?: string | undefined;
 }

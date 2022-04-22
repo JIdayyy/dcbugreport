@@ -51,4 +51,9 @@ export class FeatureCreateManyInput {
     nullable: true
   })
   userId?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  widgetsId?: string | undefined;
 }

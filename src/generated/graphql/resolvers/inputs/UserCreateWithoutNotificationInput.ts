@@ -2,11 +2,13 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ApiKeyCreateNestedManyWithoutUserInput } from "../inputs/ApiKeyCreateNestedManyWithoutUserInput";
 import { BugCreateNestedManyWithoutUserInput } from "../inputs/BugCreateNestedManyWithoutUserInput";
 import { CommentCreateNestedManyWithoutUserInput } from "../inputs/CommentCreateNestedManyWithoutUserInput";
 import { FeatureCreateNestedManyWithoutUserInput } from "../inputs/FeatureCreateNestedManyWithoutUserInput";
 import { FileCreateNestedManyWithoutUserInput } from "../inputs/FileCreateNestedManyWithoutUserInput";
 import { NotificationCreateNestedManyWithoutSenderInput } from "../inputs/NotificationCreateNestedManyWithoutSenderInput";
+import { SecretKeyCreateNestedManyWithoutUserInput } from "../inputs/SecretKeyCreateNestedManyWithoutUserInput";
 import { UserCreateroleInput } from "../inputs/UserCreateroleInput";
 
 @TypeGraphQL.InputType("UserCreateWithoutNotificationInput", {
@@ -87,4 +89,14 @@ export class UserCreateWithoutNotificationInput {
     nullable: true
   })
   feature?: FeatureCreateNestedManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => ApiKeyCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  Keys?: ApiKeyCreateNestedManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => SecretKeyCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  secret_key?: SecretKeyCreateNestedManyWithoutUserInput | undefined;
 }

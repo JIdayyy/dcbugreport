@@ -2,8 +2,10 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ApiKeyOrderByRelationAggregateInput } from "../inputs/ApiKeyOrderByRelationAggregateInput";
 import { BugOrderByRelationAggregateInput } from "../inputs/BugOrderByRelationAggregateInput";
 import { FeatureOrderByRelationAggregateInput } from "../inputs/FeatureOrderByRelationAggregateInput";
+import { SecretKeyOrderByRelationAggregateInput } from "../inputs/SecretKeyOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
 @TypeGraphQL.InputType("WebsiteOrderByWithRelationInput", {
@@ -54,4 +56,14 @@ export class WebsiteOrderByWithRelationInput {
     nullable: true
   })
   Feature?: FeatureOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => ApiKeyOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  ApiKey?: ApiKeyOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => SecretKeyOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  secret_key?: SecretKeyOrderByRelationAggregateInput | undefined;
 }

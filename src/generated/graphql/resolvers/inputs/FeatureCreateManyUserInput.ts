@@ -46,4 +46,9 @@ export class FeatureCreateManyUserInput {
     nullable: false
   })
   categoryId!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  widgetsId?: string | undefined;
 }

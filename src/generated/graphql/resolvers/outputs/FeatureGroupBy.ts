@@ -55,6 +55,11 @@ export class FeatureGroupBy {
   })
   userId!: string | null;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  widgetsId!: string | null;
+
   @TypeGraphQL.Field(_type => FeatureCountAggregate, {
     nullable: true
   })

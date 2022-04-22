@@ -3,11 +3,11 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { User } from '../../../generated/graphql';
-import loginJWTCookies from '../../../utils/loginJWTCookies';
+import loginJWTCookies from '../../../security/loginJWTCookies';
 import platformTypeChecker from '../../../utils/platformTypeChecker';
-import loginAuthorizationHeader from '../../../utils/loginAuthorisationHeader';
-import { UserWithoutCountAndPassword } from '../../models/register';
-import { LoginInput } from '../../models/login';
+import loginAuthorizationHeader from '../../../security/loginAuthorisationHeader';
+import { LoginInput } from '../../Inputs/login';
+import { UserWithoutCountAndPassword } from '@interfaces/user';
 
 @Resolver()
 export class LoginResolver {
