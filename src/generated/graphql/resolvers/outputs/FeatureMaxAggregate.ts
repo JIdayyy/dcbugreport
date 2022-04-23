@@ -51,4 +51,9 @@ export class FeatureMaxAggregate {
     nullable: true
   })
   userId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  widgetsId!: string | null;
 }

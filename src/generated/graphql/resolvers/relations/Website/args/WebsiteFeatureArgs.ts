@@ -35,5 +35,5 @@ export class WebsiteFeatureArgs {
   @TypeGraphQL.Field(_type => [FeatureScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "name" | "description" | "is_disabled" | "created_at" | "updated_at" | "websiteId" | "categoryId" | "userId"> | undefined;
+  distinct?: Array<"id" | "name" | "description" | "is_disabled" | "created_at" | "updated_at" | "websiteId" | "categoryId" | "userId" | "widgetsId"> | undefined;
 }

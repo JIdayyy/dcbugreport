@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as TypeGraphQL from 'type-graphql';
-import {
-  WebsiteWhereInput,
-  WebsiteWhereUniqueInput,
-} from '../../generated/graphql';
+import { WebsiteWhereUniqueInput } from '../../generated/graphql';
 
 @TypeGraphQL.ArgsType()
-class GetWidgetTokenARgs {
+class GetApiKeyArgs {
   @TypeGraphQL.Field((_type) => WebsiteWhereUniqueInput, {
     nullable: false,
   })
   where!: WebsiteWhereUniqueInput;
 }
 
-export default GetWidgetTokenARgs;
+export default GetApiKeyArgs;

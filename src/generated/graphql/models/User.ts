@@ -2,11 +2,13 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
+import { ApiKey } from "../models/ApiKey";
 import { Bug } from "../models/Bug";
 import { Comment } from "../models/Comment";
 import { Feature } from "../models/Feature";
 import { File } from "../models/File";
 import { Notification } from "../models/Notification";
+import { SecretKey } from "../models/SecretKey";
 import { Role } from "../enums/Role";
 import { UserCount } from "../resolvers/outputs/UserCount";
 
@@ -75,6 +77,10 @@ export class User {
   Comment?: Comment[];
 
   feature?: Feature[];
+
+  Keys?: ApiKey[];
+
+  secret_key?: SecretKey[];
 
   @TypeGraphQL.Field(_type => UserCount, {
     nullable: true

@@ -17,6 +17,12 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
   Feature: {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
+  ApiKey: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+  },
+  SecretKey: {
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+  },
   Notification: {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },

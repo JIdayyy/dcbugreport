@@ -70,4 +70,9 @@ export class FeatureScalarWhereInput {
     nullable: true
   })
   userId?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  widgetsId?: StringNullableFilter | undefined;
 }

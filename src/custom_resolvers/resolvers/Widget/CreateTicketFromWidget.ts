@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import * as TypeGraphQL from 'type-graphql';
 import graphqlFields from 'graphql-fields';
-import { PubSub } from 'type-graphql';
+import { PubSub, UseMiddleware } from 'type-graphql';
 import { GraphQLResolveInfo } from 'graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { NotificationTopics, PrismaClient } from '@prisma/client';
@@ -36,8 +36,8 @@ export class CreateTicketFromWidgetCustomResolver {
   ): Promise<Bug> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
-
-    console.log(ctx.req.headers.authorization);
+    console.log(args);
+    console.log('header', ctx.req.headers.authorization);
 
     const widgetToken = verify(
       ctx.req.headers.authorization as string,

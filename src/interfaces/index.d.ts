@@ -1,3 +1,5 @@
+import { PrismaClient } from '@prisma/client';
+
 export interface GQLContext {
   req: Request;
   res: Response;

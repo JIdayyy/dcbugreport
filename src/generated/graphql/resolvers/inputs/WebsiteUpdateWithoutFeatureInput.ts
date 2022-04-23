@@ -2,9 +2,11 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ApiKeyUpdateManyWithoutWebsiteInput } from "../inputs/ApiKeyUpdateManyWithoutWebsiteInput";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { BugUpdateManyWithoutWebsiteInput } from "../inputs/BugUpdateManyWithoutWebsiteInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { SecretKeyUpdateManyWithoutWebsiteInput } from "../inputs/SecretKeyUpdateManyWithoutWebsiteInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("WebsiteUpdateWithoutFeatureInput", {
@@ -50,4 +52,14 @@ export class WebsiteUpdateWithoutFeatureInput {
     nullable: true
   })
   Bug?: BugUpdateManyWithoutWebsiteInput | undefined;
+
+  @TypeGraphQL.Field(_type => ApiKeyUpdateManyWithoutWebsiteInput, {
+    nullable: true
+  })
+  ApiKey?: ApiKeyUpdateManyWithoutWebsiteInput | undefined;
+
+  @TypeGraphQL.Field(_type => SecretKeyUpdateManyWithoutWebsiteInput, {
+    nullable: true
+  })
+  secret_key?: SecretKeyUpdateManyWithoutWebsiteInput | undefined;
 }

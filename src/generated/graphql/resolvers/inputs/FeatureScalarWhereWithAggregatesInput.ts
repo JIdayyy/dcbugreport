@@ -70,4 +70,9 @@ export class FeatureScalarWhereWithAggregatesInput {
     nullable: true
   })
   userId?: StringNullableWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
+    nullable: true
+  })
+  widgetsId?: StringNullableWithAggregatesFilter | undefined;
 }

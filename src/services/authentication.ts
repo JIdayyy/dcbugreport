@@ -6,10 +6,41 @@ import { sign } from 'jsonwebtoken';
 import { Role, User } from '../generated/graphql';
 import { GQLContext } from '../interfaces/index';
 
-export const getWidgetToken = async ({
+/**
+ * This function sign a new API key for a website and return it
+ * @param {string} websiteId - is the id of the website to get the widget api key for
+ * @returns {Promise<ApiKey>} string - is the widget api key as a promise
+ */
+
+export const generateApiKey = async ({
   websiteId,
 }: {
   websiteId: string;
+}): Promise<string> => {
+  const apiKey = sign(
+    {
+      id: '100_100_1337',
+      websiteId,
+      email: 'guest@widget.ts',
+      role: [Role.WIDGET],
+    },
+    process.env.JWT_SECRET_WIDGET as string
+  );
+  return apiKey;
+};
+
+/**
+ * This function sign a new token for a website and return it
+ * @param {string} websiteId - is the id of the website to get the widget api key for
+ * @returns {Promise<WidgetToken>} string - is the widget api token as a promise
+ */
+
+export const generateSecretKey = async ({
+  websiteId,
+  apiKeyId,
+}: {
+  websiteId: string;
+  apiKeyId: string;
 }): Promise<string> => {
   const website = await prismaClient.website.findUnique({
     where: {
@@ -22,6 +53,7 @@ export const getWidgetToken = async ({
   const token = sign(
     {
       id: '100_100_1337',
+      apiKeyId: apiKeyId,
       websiteId,
       email: 'guest@widget.ts',
       role: [Role.WIDGET],
@@ -30,6 +62,13 @@ export const getWidgetToken = async ({
   );
   return token;
 };
+
+/**
+ * This function check if the input password match with the salted one
+ * @param {string} password - is the password to check
+ * @param {string} passwordFromDatabase - is the salted password from the database
+ * @returns  true or Error - as the result of the check
+ */
 
 export const checkPassword = (
   password: string,
@@ -42,6 +81,11 @@ export const checkPassword = (
   }
   return true;
 };
+
+/**
+ * @param user - is the user to check
+ * @returns token - as the JWT token with the user informations as payload
+ */
 
 export const signToken = (user: User): string => {
   const token = sign(
@@ -59,6 +103,12 @@ export const signToken = (user: User): string => {
   );
   return token;
 };
+
+/**
+ * @param token - is the token set is cookies
+ * @param ctx - is the context of the API
+ * @returns void - when the token is set in the cookies
+ */
 
 export const setCookieToken = (token: string, ctx: GQLContext): void => {
   const cookies = new Cookies(ctx.req, ctx.res, {

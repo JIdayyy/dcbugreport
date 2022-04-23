@@ -52,4 +52,9 @@ export class FeatureMinOrderByAggregateInput {
     nullable: true
   })
   userId?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  widgetsId?: "asc" | "desc" | undefined;
 }
