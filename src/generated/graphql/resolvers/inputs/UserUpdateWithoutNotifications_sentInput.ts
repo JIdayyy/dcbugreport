@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ApiKeyUpdateManyWithoutUserInput } from "../inputs/ApiKeyUpdateManyWithoutUserInput";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { BugUpdateManyWithoutUserInput } from "../inputs/BugUpdateManyWithoutUserInput";
 import { CommentUpdateManyWithoutUserInput } from "../inputs/CommentUpdateManyWithoutUserInput";
@@ -10,6 +11,7 @@ import { FeatureUpdateManyWithoutUserInput } from "../inputs/FeatureUpdateManyWi
 import { FileUpdateManyWithoutUserInput } from "../inputs/FileUpdateManyWithoutUserInput";
 import { NotificationUpdateManyWithoutUserInput } from "../inputs/NotificationUpdateManyWithoutUserInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
+import { SecretKeyUpdateManyWithoutUserInput } from "../inputs/SecretKeyUpdateManyWithoutUserInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateroleInput } from "../inputs/UserUpdateroleInput";
 
@@ -91,4 +93,14 @@ export class UserUpdateWithoutNotifications_sentInput {
     nullable: true
   })
   feature?: FeatureUpdateManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => ApiKeyUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  Keys?: ApiKeyUpdateManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => SecretKeyUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  secret_key?: SecretKeyUpdateManyWithoutUserInput | undefined;
 }

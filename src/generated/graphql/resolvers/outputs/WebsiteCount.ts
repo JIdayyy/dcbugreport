@@ -16,4 +16,14 @@ export class WebsiteCount {
     nullable: false
   })
   Feature!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  ApiKey!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  secret_key!: number;
 }

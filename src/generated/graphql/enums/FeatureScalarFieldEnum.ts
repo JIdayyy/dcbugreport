@@ -9,7 +9,8 @@ export enum FeatureScalarFieldEnum {
   updated_at = "updated_at",
   websiteId = "websiteId",
   categoryId = "categoryId",
-  userId = "userId"
+  userId = "userId",
+  widgetsId = "widgetsId"
 }
 TypeGraphQL.registerEnumType(FeatureScalarFieldEnum, {
   name: "FeatureScalarFieldEnum",

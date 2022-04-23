@@ -1,16 +1,20 @@
 import * as TypeGraphQL from "type-graphql";
+import { ApiKey } from "../../../models/ApiKey";
 import { Bug } from "../../../models/Bug";
 import { Comment } from "../../../models/Comment";
 import { Feature } from "../../../models/Feature";
 import { File } from "../../../models/File";
 import { Notification } from "../../../models/Notification";
+import { SecretKey } from "../../../models/SecretKey";
 import { User } from "../../../models/User";
 import { UserBugArgs } from "./args/UserBugArgs";
 import { UserCommentArgs } from "./args/UserCommentArgs";
 import { UserFeatureArgs } from "./args/UserFeatureArgs";
 import { UserFilesArgs } from "./args/UserFilesArgs";
+import { UserKeysArgs } from "./args/UserKeysArgs";
 import { UserNotificationArgs } from "./args/UserNotificationArgs";
 import { UserNotifications_sentArgs } from "./args/UserNotifications_sentArgs";
+import { UserSecret_keyArgs } from "./args/UserSecret_keyArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -79,5 +83,27 @@ export class UserRelationsResolver {
         id: user.id,
       },
     }).feature(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [ApiKey], {
+    nullable: false
+  })
+  async Keys(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserKeysArgs): Promise<ApiKey[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).Keys(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [SecretKey], {
+    nullable: false
+  })
+  async secret_key(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserSecret_keyArgs): Promise<SecretKey[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).secret_key(args);
   }
 }

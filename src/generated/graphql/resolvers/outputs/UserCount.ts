@@ -36,4 +36,14 @@ export class UserCount {
     nullable: false
   })
   feature!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  Keys!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  secret_key!: number;
 }

@@ -6,8 +6,8 @@ import { Request, Response } from 'express';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { verify } from 'jsonwebtoken';
 import { User } from '../../../generated/graphql';
-import { UserWithoutCountAndPassword } from '../../models/register';
 import WidgetLoginArgs from '../../Args/widgetLoginArgs';
+import { UserWithoutCountAndPassword } from '@interfaces/user';
 
 @Resolver()
 export class WidgetLogin {

@@ -2,8 +2,10 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ApiKeyCreateNestedManyWithoutWebsiteInput } from "../inputs/ApiKeyCreateNestedManyWithoutWebsiteInput";
 import { BugCreateNestedManyWithoutWebsiteInput } from "../inputs/BugCreateNestedManyWithoutWebsiteInput";
 import { FeatureCreateNestedManyWithoutWebsiteInput } from "../inputs/FeatureCreateNestedManyWithoutWebsiteInput";
+import { SecretKeyCreateNestedManyWithoutWebsiteInput } from "../inputs/SecretKeyCreateNestedManyWithoutWebsiteInput";
 
 @TypeGraphQL.InputType("WebsiteCreateInput", {
   isAbstract: true
@@ -53,4 +55,14 @@ export class WebsiteCreateInput {
     nullable: true
   })
   Feature?: FeatureCreateNestedManyWithoutWebsiteInput | undefined;
+
+  @TypeGraphQL.Field(_type => ApiKeyCreateNestedManyWithoutWebsiteInput, {
+    nullable: true
+  })
+  ApiKey?: ApiKeyCreateNestedManyWithoutWebsiteInput | undefined;
+
+  @TypeGraphQL.Field(_type => SecretKeyCreateNestedManyWithoutWebsiteInput, {
+    nullable: true
+  })
+  secret_key?: SecretKeyCreateNestedManyWithoutWebsiteInput | undefined;
 }

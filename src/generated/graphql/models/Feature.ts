@@ -65,6 +65,11 @@ export class Feature {
   })
   userId?: string | null;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  widgetsId?: string | null;
+
   @TypeGraphQL.Field(_type => FeatureCount, {
     nullable: true
   })

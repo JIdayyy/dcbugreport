@@ -2,10 +2,12 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ApiKeyListRelationFilter } from "../inputs/ApiKeyListRelationFilter";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { BugListRelationFilter } from "../inputs/BugListRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { FeatureListRelationFilter } from "../inputs/FeatureListRelationFilter";
+import { SecretKeyListRelationFilter } from "../inputs/SecretKeyListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @TypeGraphQL.InputType("WebsiteWhereInput", {
@@ -71,4 +73,14 @@ export class WebsiteWhereInput {
     nullable: true
   })
   Feature?: FeatureListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => ApiKeyListRelationFilter, {
+    nullable: true
+  })
+  ApiKey?: ApiKeyListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => SecretKeyListRelationFilter, {
+    nullable: true
+  })
+  secret_key?: SecretKeyListRelationFilter | undefined;
 }

@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { CommentUpdateManyWithoutFeatureInput } from "../inputs/CommentUpdateManyWithoutFeatureInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateOneWithoutFeatureInput } from "../inputs/UserUpdateOneWithoutFeatureInput";
 import { WebsiteUpdateOneRequiredWithoutFeatureInput } from "../inputs/WebsiteUpdateOneRequiredWithoutFeatureInput";
@@ -57,4 +58,9 @@ export class FeatureUpdateWithoutCategoryInput {
     nullable: true
   })
   User?: UserUpdateOneWithoutFeatureInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  widgetsId?: NullableStringFieldUpdateOperationsInput | undefined;
 }

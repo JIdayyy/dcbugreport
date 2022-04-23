@@ -56,6 +56,11 @@ export class FeatureOrderByWithAggregationInput {
   })
   userId?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  widgetsId?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => FeatureCountOrderByAggregateInput, {
     nullable: true
   })

@@ -2,8 +2,10 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
+import { ApiKey } from "../models/ApiKey";
 import { Bug } from "../models/Bug";
 import { Feature } from "../models/Feature";
+import { SecretKey } from "../models/SecretKey";
 import { WebsiteCount } from "../resolvers/outputs/WebsiteCount";
 
 @TypeGraphQL.ObjectType("Website", {
@@ -48,6 +50,10 @@ export class Website {
   Bug?: Bug[];
 
   Feature?: Feature[];
+
+  ApiKey?: ApiKey[];
+
+  secret_key?: SecretKey[];
 
   @TypeGraphQL.Field(_type => WebsiteCount, {
     nullable: true

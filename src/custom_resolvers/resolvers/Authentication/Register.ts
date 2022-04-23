@@ -7,10 +7,9 @@ import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import { sign } from 'jsonwebtoken';
 import { User } from '../../../generated/graphql/models/User';
-import {
-  RegisterInput,
-  UserWithoutCountAndPassword,
-} from '../../models/register';
+import { RegisterInput } from '../../Inputs/register';
+import { UserWithoutCountAndPassword } from '@interfaces/user';
+import { Role } from '../../../generated/graphql';
 
 @Resolver()
 export class RegisterResolver {
@@ -36,7 +35,7 @@ export class RegisterResolver {
         email: data.email,
         password: hashedPassword,
         is_disabled: false,
-        role: ['USER'],
+        role: [Role.ADMIN],
       },
     });
 
