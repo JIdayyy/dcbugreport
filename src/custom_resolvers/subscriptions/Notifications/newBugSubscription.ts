@@ -17,12 +17,14 @@ import {
   ResolverFilterData,
   Ctx,
 } from 'type-graphql';
-
-import { User } from '../../generated/graphql';
-import { NotificationType, NotificationPayload } from '../models/notification';
+import { User } from '../../../generated/graphql';
+import {
+  NotificationType,
+  NotificationPayload,
+} from '../../models/notification';
 
 @Resolver((_of) => NotificationType)
-export class SampleResolver {
+export class SubscribtionsResolver {
   private autoIncrement = 0;
 
   @Query((returns) => Date)

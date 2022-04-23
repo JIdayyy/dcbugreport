@@ -10,10 +10,10 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import { resolvers } from './generated/graphql';
 import customAuthChecker from './services/customAuthChecker';
 import { Resolve } from './config/authentication.config';
-import { SampleResolver } from './custom_resolvers/subscriptions/newBugSubscription';
 import { httpServer } from './app';
 import { customResolvers } from './custom_resolvers/resolvers';
 import { graphQLContext, webSocketContext } from './context/context';
+import { customSubscriptionsResolvers } from './custom_resolvers/subscriptions/index';
 
 const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   // The Resolve function is called before the server starts.
@@ -26,7 +26,11 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   });
 
   const schema = await buildSchema({
-    resolvers: [...resolvers, ...customResolvers, SampleResolver],
+    resolvers: [
+      ...resolvers,
+      ...customResolvers,
+      ...customSubscriptionsResolvers,
+    ],
     validate: false,
     authChecker: customAuthChecker,
   });
