@@ -50,8 +50,6 @@ export class MeResolver {
 
     setCookieToken(newToken, ctx);
 
-    ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
-
     return userWithoutPassword;
   }
 }
