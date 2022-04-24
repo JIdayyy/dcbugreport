@@ -12,7 +12,15 @@ export class LogoutResolver {
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: process.env.NODE_ENV === 'production',
     });
-    cookies.set('token', '');
+    cookies.set('token', '', {
+      httpOnly: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? 'bug-rep.digitalcopilote.re'
+          : 'localhost',
+    });
     return 'User successfully logged out';
   }
 }
