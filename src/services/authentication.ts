@@ -141,10 +141,10 @@ export const setCookieToken = (token: string, ctx: GQLContext): void => {
     httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    domain:
-      process.env.NODE_ENV === 'production'
-        ? 'dcbugreport.vercel.app'
-        : 'localhost',
+    // domain:
+    //   process.env.NODE_ENV === 'production'
+    //     ? 'dcbugreport.vercel.app'
+    //     : 'localhost',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
