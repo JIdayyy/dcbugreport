@@ -143,7 +143,7 @@ export const setCookieToken = (token: string, ctx: GQLContext): void => {
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     domain:
       process.env.NODE_ENV === 'production'
-        ? 'https://dcbugreport.vercel.app/'
+        ? 'dcbugreport.vercel.app'
         : 'localhost',
   });
 
