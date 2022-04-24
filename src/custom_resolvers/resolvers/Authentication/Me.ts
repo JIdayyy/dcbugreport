@@ -7,99 +7,51 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { User } from '../../../generated/graphql';
 import platformTypeChecker from '../../../utils/platformTypeChecker';
 import { UserWithoutCountAndPassword } from '@interfaces/user';
+import { setCookieToken, signToken } from '../../../services/authentication';
+import { GQLContext } from '../../../interfaces';
 
 @Resolver()
 export class MeResolver {
   @Mutation(() => User)
-  async me(
-    @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response }
-  ): Promise<UserWithoutCountAndPassword> {
-    if (platformTypeChecker(ctx.req) === 'web') {
-      const cookies = new Cookies(ctx.req, ctx.res, {
-        secure: true,
-      });
-      const token = cookies.get('token');
+  async me(@Ctx() ctx: GQLContext): Promise<UserWithoutCountAndPassword> {
+    const cookies = new Cookies(ctx.req, ctx.res, {
+      secure: true,
+    });
+    const token = cookies.get('token');
 
-      if (!token) throw new Error('User not logged in');
+    if (!token) throw new Error('No token provided');
 
-      const user = jwt.verify(
-        token,
-        process.env.JWT_SECRET as string
-      ) as JwtPayload;
-
-      const prismaUser = await ctx.prisma.user.findUnique({
-        where: {
-          email: user.email,
-        },
-      });
-
-      if (!prismaUser) throw new Error("User doesn't exist");
-
-      const newToken = jwt.sign(
-        {
-          email: prismaUser.email,
-          id: prismaUser.id,
-          role: prismaUser.role,
-        },
-        process.env.JWT_SECRET as string,
-        {
-          expiresIn: '1d',
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET as string,
+      function (err, decoded) {
+        if (err) {
+          return console.log(decoded);
         }
-      );
+      }
+    );
 
-      const { password, ...userWithoutPassword } = prismaUser;
+    const payload = jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
 
-      cookies.set('token', newToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: process.env.NODE_ENV === 'production',
-        domain:
-          process.env.NODE_ENV === 'production'
-            ? 'https://2109-wns-remote1-yellowteam-front.vercel.app'
-            : 'http://localhost:3000',
-      });
+    const prismaUser = await ctx.prisma.user.findUnique({
+      where: {
+        email: payload.email,
+      },
+    });
 
-      ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
+    if (!prismaUser) throw new Error("User doesn't exist");
 
-      return userWithoutPassword;
-    }
-    if (platformTypeChecker(ctx.req) === 'mobile') {
-      const token = ctx.req.headers.authorization?.split(' ')[1];
+    const newToken = signToken(prismaUser);
 
-      if (!token) throw new Error('User not logged in');
+    const { password, ...userWithoutPassword } = prismaUser;
 
-      const user = jwt.verify(
-        token,
-        process.env.JWT_SECRET as string
-      ) as JwtPayload;
+    setCookieToken(newToken, ctx);
 
-      const prismaUser = await ctx.prisma.user.findUnique({
-        where: {
-          email: user.email,
-        },
-      });
+    ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-      if (!prismaUser) throw new Error("User doesn't exist");
-
-      const newToken = jwt.sign(
-        {
-          email: prismaUser.email,
-          id: prismaUser.id,
-          role: prismaUser.role,
-        },
-        process.env.JWT_SECRET as string,
-        {
-          expiresIn: '1d',
-        }
-      );
-
-      const { password, ...userWithoutPassword } = prismaUser;
-
-      ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
-      ctx.res.setHeader('x-Authorization', `Bearer ${newToken}`);
-
-      return userWithoutPassword;
-    }
-    throw new Error('unsupported pltform');
+    return userWithoutPassword;
   }
 }
