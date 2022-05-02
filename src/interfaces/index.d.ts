@@ -5,7 +5,7 @@ export interface GQLContext {
   res: Response;
   prisma: PrismaClient;
   user?: User;
-  pubsub: PubSub;
+  pubsub?: PubSub;
 }
 
 export interface WebsocketContext {

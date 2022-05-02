@@ -1,3 +1,4 @@
+import { signRefreshToken } from './../services/authentication';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { LoginInput } from '@custom_resolvers/Inputs/login';
 import { UserWithoutCountAndPassword } from '@interfaces/user';
@@ -24,10 +25,12 @@ const loginJWTCookies = async (
   checkPassword(data.password, user.password, ctx);
 
   const token = signToken(user);
+  const refreshToken = signRefreshToken(user);
 
   const { password, ...userWithoutPassword } = user;
 
-  setCookieToken(token, ctx);
+  setCookieToken(token, 'token', ctx);
+  setCookieToken(refreshToken, 'refreshToken', ctx);
 
   return userWithoutPassword;
 };

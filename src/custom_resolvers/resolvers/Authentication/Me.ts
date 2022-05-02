@@ -21,7 +21,7 @@ export class MeResolver {
 
     if (!token) throw new Error('No token provided');
 
-    jwt.verify(
+    const result = jwt.verify(
       token,
       process.env.JWT_SECRET as string,
       function (err, decoded) {
@@ -48,7 +48,7 @@ export class MeResolver {
 
     const { password, ...userWithoutPassword } = prismaUser;
 
-    setCookieToken(newToken, ctx);
+    setCookieToken(newToken, 'token', ctx);
 
     return userWithoutPassword;
   }
