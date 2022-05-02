@@ -1,7 +1,7 @@
 - name: CapRover Deploy
   uses: AlexxNB/caprover-action@v1
 
-with:
+- with: null
   server: 'https://captain.digitalcopilote.re/'
   password: '${{ secrets.CAPROVER_PASSWORD }}'
-  appname: 'bug-rep'
+  appname: bug-rep
