@@ -1,3 +1,4 @@
+import { UserWithoutPassword } from './../interfaces/user.d';
 import prismaClient from '../../prisma/prismaClient';
 import { ApolloError } from 'apollo-server-core';
 import bcrypt from 'bcrypt';
@@ -87,7 +88,7 @@ export const checkPassword = (
  * @returns token - as the JWT token with the user informations as payload
  */
 
-export const signToken = (user: User): string => {
+export const signToken = (user: UserWithoutPassword | User): string => {
   const token = sign(
     {
       email: user.email,
@@ -98,7 +99,7 @@ export const signToken = (user: User): string => {
     },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: '1d',
+      expiresIn: '5s',
     }
   );
   return token;
@@ -109,7 +110,7 @@ export const signToken = (user: User): string => {
  * @returns token - as the JWT refresh token with the user informations as payload
  */
 
-export const signRefreshToken = (user: User): string => {
+export const signRefreshToken = (user: User | UserWithoutPassword): string => {
   const token = sign(
     {
       email: user.email,
@@ -120,7 +121,7 @@ export const signRefreshToken = (user: User): string => {
     },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: '6d',
+      expiresIn: '10s',
     }
   );
   return token;
@@ -128,23 +129,24 @@ export const signRefreshToken = (user: User): string => {
 
 /**
  * @param token - is the token set is cookies
+ * @params cookieName - is the name of the cookie
  * @param ctx - is the context of the API
  * @returns void - when the token is set in the cookies
  */
 
-export const setCookieToken = (token: string, ctx: GQLContext): void => {
+export const setCookieToken = (
+  token: string,
+  cookieName: string,
+  ctx: GQLContext
+): void => {
   const cookies = new Cookies(ctx.req, ctx.res, {
     secure: process.env.NODE_ENV === 'production',
   });
 
-  cookies.set('token', token, {
+  cookies.set(cookieName, token, {
     httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    domain:
-      process.env.NODE_ENV === 'production'
-        ? 'bug-rep.digitalcopilote.re'
-        : 'localhost',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
