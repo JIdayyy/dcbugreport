@@ -99,7 +99,7 @@ export const signToken = (user: UserWithoutPassword | User): string => {
     },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: '5s',
+      expiresIn: '1d',
     }
   );
   return token;
@@ -121,7 +121,7 @@ export const signRefreshToken = (user: User | UserWithoutPassword): string => {
     },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: '10s',
+      expiresIn: '30d',
     }
   );
   return token;
