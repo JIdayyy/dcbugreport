@@ -15,7 +15,7 @@
       "*": ["./*"],
       "src/*": ["src/*"],
       "src/generated/*": ["src/generated/*"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["src/services/*"]
     },
     "allowJs": true,
     "incremental": true,

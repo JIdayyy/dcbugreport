@@ -1,5 +1,5 @@
 import { Role } from '@prisma/client';
-import { Authorized } from 'type-graphql';
+import { Authorized, Directive } from 'type-graphql';
 import {
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
@@ -27,18 +27,10 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Bug: {
-    aggregateBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    bug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    bugs: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    createBug: [],
-    createManyBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    deleteBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    deleteManyBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    findFirstBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    groupByBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    updateBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    updateManyBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    upsertBug: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   User: {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
