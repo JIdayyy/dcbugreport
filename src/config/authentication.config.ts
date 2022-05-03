@@ -9,22 +9,40 @@ import {
 
 const resolversEnhanceMap: ResolversEnhanceMap = {
   File: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   Comment: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   Feature: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   ApiKey: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   SecretKey: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   Notification: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   Bug: {
     _all: [
@@ -36,11 +54,17 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Website: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
   },
   Category: {
     aggregateCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    category: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    category: [
+      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
+      Directive('@cacheControl(maxAge: 7200)'),
+    ],
     createCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     createManyCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     deleteCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
@@ -50,7 +74,7 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
     updateCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     updateManyCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     upsertCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    categories: [],
+    categories: [Directive('@cacheControl(maxAge: 7200)')],
   },
 };
 
