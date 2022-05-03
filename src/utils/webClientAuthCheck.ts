@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GQLContext } from '@interfaces';
 import { setCookieToken, signRefreshToken } from './../services/authentication';
-import { signToken } from '../services/authentication';
+import { signToken } from '@services/authentication';
 import { ApolloError } from 'apollo-server-core';
 import Cookies from 'cookies';
 import { verify, JwtPayload, decode } from 'jsonwebtoken';
@@ -31,7 +32,7 @@ const webClientAuthCheck = async (
     throw new ApolloError('Acces denied');
   } catch (error) {
     if (error instanceof Error && error.name === 'TokenExpiredError') {
-      verify(refreshToken, process.env.JWT_SECRET as string, (err) => {
+      verify(refreshToken, process.env.JWT_SECRET as string, (err: any) => {
         console.log(err);
       });
 

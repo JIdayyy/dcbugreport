@@ -4,11 +4,11 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev ./src/index",
+    "dev": "ts-node-dev -r  ./register-paths.js  ./src/index",
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "start": "node ./dist/src/index.js",
+    "start": "node -r  ./register-paths.js  ./dist/src/index.js",
     "seed": "npx prisma migrate reset && ts-node prisma/seed.ts",
     "build": "npx prisma generate && tsc",
     "deploy": " npm run build && node --trace-warnings ./dist/src/index.js",
@@ -17,9 +17,6 @@
     "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f",
     "studio:test": "dotenv -e .env.test -- npx prisma studio"
   },
-  "_moduleDirectories": [
-    "src"
-  ],
   "dependencies": {
     "@graphql-tools/schema": "^8.3.2",
     "@prisma/client": "3.11.0",
@@ -59,7 +56,7 @@
     "reflect-metadata": "^0.1.13",
     "stream-promise": "^3.2.0",
     "ts-jest": "^27.0.7",
-    "tsconfig-paths": "^3.14.1",
+    "tsconfig-paths": "^4.0.0",
     "type-graphql": "^1.1.1",
     "ws": "^8.5.0"
   },
@@ -86,6 +83,7 @@
     "prettier": "^2.3.2",
     "ts-node": "^10.5.0",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typegraphql-prisma": "^0.19.1",
     "typescript": "^4.4.4"
   },
