@@ -1,3 +1,4 @@
+import { redisOptions } from './services/redis/redisClient';
 import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
@@ -8,12 +9,16 @@ import { WebSocketServer } from 'ws';
 import { buildSchema } from 'type-graphql';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { resolvers } from './generated/graphql';
+import { ApolloServerPluginCacheControl } from 'apollo-server-core';
 import customAuthChecker from './services/customAuthChecker';
+import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import { Resolve } from './config/authentication.config';
 import { httpServer } from './app';
 import { customResolvers } from './custom_resolvers/resolvers';
 import { graphQLContext, webSocketContext } from './context/context';
 import { customSubscriptionsResolvers } from './custom_resolvers/subscriptions/index';
+import { redisPubSub } from './services/redis';
+import { RedisCache } from 'apollo-server-cache-redis';
 
 const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   // The Resolve function is called before the server starts.
@@ -31,6 +36,7 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
       ...customResolvers,
       ...customSubscriptionsResolvers,
     ],
+    pubSub: redisPubSub,
     validate: false,
     authChecker: customAuthChecker,
   });
@@ -46,8 +52,27 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => graphQLContext({ req, res }),
+    cache: new RedisCache({
+      ...redisOptions,
+      keyPrefix: 'apollo:',
+    }),
+
     plugins: [
+      ApolloServerPluginCacheControl({
+        defaultMaxAge: 36000,
+        calculateHttpHeaders: true,
+      }),
       ApolloServerPluginDrainHttpServer({ httpServer }),
+      responseCachePlugin({
+        sessionId: ({ context, response, operation }) => {
+          console.dir(response);
+          console.log(operation);
+          return context.user ? context.user.id : null;
+        },
+        // Only cache public responses
+        shouldReadFromCache: ({ context }) => context.user,
+        shouldWriteToCache: ({ context }) => context.user,
+      }),
       process.env.NODE_ENV === 'production'
         ? ApolloServerPluginLandingPageDisabled
         : ApolloServerPluginLandingPageGraphQLPlayground,
