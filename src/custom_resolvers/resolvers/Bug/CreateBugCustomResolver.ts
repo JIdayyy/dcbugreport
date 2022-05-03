@@ -1,8 +1,9 @@
+import { GQLContext } from '@interfaces';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import * as TypeGraphQL from 'type-graphql';
 import graphqlFields from 'graphql-fields';
-import { PubSub } from 'type-graphql';
+import { Publisher, PubSub } from 'type-graphql';
 import { GraphQLResolveInfo } from 'graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { JwtPayload, verify } from 'jsonwebtoken';
@@ -26,16 +27,10 @@ export class CreateBugCustomResolver {
   })
   async createBugCustom(
     @TypeGraphQL.Ctx()
-    ctx: {
-      prisma: PrismaClient;
-      req: Request;
-      res: Response;
-      pubsub: PubSubEngine;
-      user: JwtPayload;
-    },
+    ctx: GQLContext,
     @TypeGraphQL.Info() info: GraphQLResolveInfo,
     @TypeGraphQL.Args() args: CreateBugArgs,
-    @PubSub() pubSub: PubSubEngine
+    @PubSub('NOTIFICATIONS') pubSub: Publisher<NotificationPayload>
   ): Promise<Bug> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
@@ -48,7 +43,7 @@ export class CreateBugCustomResolver {
     });
 
     const payload: NotificationPayload = {
-      senderId: '100_100_1337',
+      senderId: ctx.user.id,
       userId: ctx.user.id,
       message: `${ctx.user.first_name} ${ctx.user.last_name} has created a new bug on ${websiteFromPrisma.name}`,
     };
@@ -74,7 +69,7 @@ export class CreateBugCustomResolver {
     });
 
     if (bug) {
-      await pubSub.publish('NOTIFICATIONS', payload);
+      await pubSub(payload);
     }
 
     return bug;

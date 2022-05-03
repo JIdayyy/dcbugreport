@@ -7,7 +7,6 @@ import { GraphQLResolveInfo } from 'graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
 import { NotificationTopics, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { Bug } from '../../../generated/graphql/models/Bug';
 import {
   transformFields,
   getPrismaFromContext,
@@ -16,6 +15,7 @@ import {
 import { NotificationPayload } from '../../models/notification';
 import { JwtPayload, verify } from 'jsonwebtoken';
 import { CreateBugFromWidgetArgs } from '../../Args/createBugFromWidgetArgs';
+import { Bug } from '../../../generated/graphql/models/Bug';
 
 @TypeGraphQL.Resolver((_of) => Bug)
 export class CreateTicketFromWidgetCustomResolver {
@@ -36,8 +36,6 @@ export class CreateTicketFromWidgetCustomResolver {
   ): Promise<Bug> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { _count } = transformFields(graphqlFields(info as any));
-    console.log(args);
-    console.log('header', ctx.req.headers.authorization);
 
     const widgetToken = verify(
       ctx.req.headers.authorization as string,

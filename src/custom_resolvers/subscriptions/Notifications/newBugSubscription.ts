@@ -1,8 +1,7 @@
+import { WebsocketContext } from '@interfaces';
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-plusplus */
-import { PrismaClient } from '@prisma/client';
-import { Request, Response } from 'express';
 import * as TypeGraphQL from 'type-graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
 import {
@@ -14,10 +13,7 @@ import {
   Publisher,
   Subscription,
   Root,
-  ResolverFilterData,
-  Ctx,
 } from 'type-graphql';
-import { User } from '../../../generated/graphql';
 import {
   NotificationType,
   NotificationPayload,
@@ -61,22 +57,15 @@ export class SubscribtionsResolver {
 
   @Subscription({
     topics: 'NOTIFICATIONS',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    filter: ({ context }: any) => true,
+    filter: () => true,
   })
   normalSubscription(
-    @Root() { senderId, userId, message }: NotificationPayload,
+    @Root() { senderId, message }: NotificationPayload,
     @TypeGraphQL.Ctx()
-    ctx: {
-      user: User;
-      prisma: PrismaClient;
-      req: Request;
-      res: Response;
-      pubsub: PubSubEngine;
-    }
+    ctx: WebsocketContext
   ): NotificationType {
     return {
-      id: 1,
+      id: senderId,
       date: new Date(),
       message,
     };
@@ -84,14 +73,15 @@ export class SubscribtionsResolver {
 
   @Subscription((returns) => NotificationType, {
     topics: 'NOTIFICATIONS',
-    filter: ({ payload }: ResolverFilterData<NotificationPayload>) =>
-      +payload.senderId % 2 === 0,
+    filter: ({ context, payload }) => {
+      return context.userId === payload.userId;
+    },
   })
   subscriptionWithFilter(
     @Root() { senderId, userId, message }: NotificationPayload
   ): NotificationType {
     const newNotification: NotificationType = {
-      id: +userId,
+      id: senderId,
       message,
       date: new Date(),
     };
@@ -122,6 +112,6 @@ export class SubscribtionsResolver {
     @Arg('topic') topic: string,
     @Root() { senderId, userId, message }: NotificationPayload
   ): NotificationType {
-    return { id: +userId, message, date: new Date() };
+    return { id: userId, message, date: new Date() };
   }
 }
