@@ -1,17 +1,16 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import { graphqlUploadExpress } from 'graphql-upload';
-import dotenv from 'dotenv';
 import morgan from 'morgan';
 import createServer from './server';
 import app, { httpServer } from './app';
 import limiter from './security/rateLimit';
 
-dotenv.config();
-
 process.on('warning', (e) => console.warn(e.stack));
 
 const { PORT } = process.env;
+
+console.log('port', PORT);
 
 (async () => {
   const server = await createServer();
