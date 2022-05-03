@@ -4,6 +4,8 @@ import Redis from 'ioredis';
 
 dotenv.config();
 
+console.log(process.env.REDIS_PASSWORD);
+
 export const redisOptions = {
   port: +process.env.REDIS_PORT! || 6379,
   host: process.env.REDIS_HOST as string,
