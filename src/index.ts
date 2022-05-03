@@ -10,8 +10,6 @@ process.on('warning', (e) => console.warn(e.stack));
 
 const { PORT } = process.env;
 
-console.log('port', PORT);
-
 (async () => {
   const server = await createServer();
 
