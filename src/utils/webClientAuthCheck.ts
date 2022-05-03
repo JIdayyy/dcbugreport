@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GQLContext } from '@interfaces';
 import { setCookieToken, signRefreshToken } from './../services/authentication';
-import { signToken } from '@services/authentication';
+import { signToken } from '../services/authentication';
 import { ApolloError } from 'apollo-server-core';
 import Cookies from 'cookies';
 import { verify, JwtPayload, decode } from 'jsonwebtoken';
