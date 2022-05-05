@@ -9,62 +9,35 @@ import {
 
 const resolversEnhanceMap: ResolversEnhanceMap = {
   File: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Comment: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Feature: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   ApiKey: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   SecretKey: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Notification: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Bug: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   User: {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Website: {
-    _all: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Category: {
     aggregateCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
-    category: [
-      Authorized(Role.SUPER_ADMIN, Role.ADMIN),
-      Directive('@cacheControl(maxAge: 7200)'),
-    ],
+    category: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     createCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     createManyCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
     deleteCategory: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
