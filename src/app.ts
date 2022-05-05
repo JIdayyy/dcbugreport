@@ -12,11 +12,6 @@ app.use(express.json());
 
 app.use(cors(corsOptions));
 
-app.use(function (req, res, next) {
-  res.set('Cache-control', 'public, max-age=604800');
-  next();
-});
-
 app.get('/', (req, res) => res.status(200).send('Hello World'));
 
 export const httpServer = createServer(app);
