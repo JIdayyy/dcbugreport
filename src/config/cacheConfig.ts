@@ -8,9 +8,8 @@ const cacheConfig = (
   if (!requestContext.context.user) {
     return false;
   }
-  console.log(requestContext.operationName);
   if (
-    // requestContext.operationName === 'GetAllBugsBy' ||
+    requestContext.operationName === 'GetAllBugsBy' ||
     requestContext.operationName === 'GetAllComments' ||
     requestContext.operationName === 'GetAllFilesByBug' ||
     requestContext.operationName === 'GetAllFilesByComment' ||

@@ -61,15 +61,20 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
     schema,
     context: async ({ req, res }) => graphQLContext({ req, res }),
 
-    cache: new RedisCache({
-      ...redisOptions,
-      keyPrefix: 'apollo-test-2:',
+    cache: new BaseRedisCache({
+      client: new Redis({
+        ...redisOptions,
+        keyPrefix: 'apollo-cache:',
+      }) as RedisClient,
     }),
 
     persistedQueries: {
-      cache: new BaseRedisCache({
-        client: new Redis({ ...redisOptions }) as RedisClient,
+      cache: new RedisCache({
+        ...redisOptions,
+        keyPrefix: 'apollo-apq:',
       }),
+
+      ttl: 3600,
     },
 
     plugins: [
@@ -80,7 +85,7 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
       ApolloServerPluginDrainHttpServer({ httpServer }),
       responseCachePlugin({
         sessionId: ({ context }) => (context.user ? context.user.id : null),
-        // // Only cache public responses
+
         shouldReadFromCache: cacheConfig,
         shouldWriteToCache: ({ context }) => context.user,
       }),
