@@ -18,7 +18,13 @@ import { customResolvers } from './custom_resolvers/resolvers';
 import { graphQLContext, webSocketContext } from './context/context';
 import { customSubscriptionsResolvers } from './custom_resolvers/subscriptions/index';
 import { redisPubSub } from './services/redis';
-import { RedisCache } from 'apollo-server-cache-redis';
+import {
+  BaseRedisCache,
+  RedisCache,
+  RedisClient,
+} from 'apollo-server-cache-redis';
+import cacheConfig from './config/cacheConfig';
+import Redis from 'ioredis';
 
 const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   // The Resolve function is called before the server starts.
@@ -36,8 +42,10 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
       ...customResolvers,
       ...customSubscriptionsResolvers,
     ],
+
     pubSub: redisPubSub,
     validate: false,
+
     authChecker: customAuthChecker,
   });
 
@@ -52,25 +60,28 @@ const customCreateServer = async (): Promise<ApolloServer<ExpressContext>> => {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => graphQLContext({ req, res }),
+
     cache: new RedisCache({
       ...redisOptions,
-      keyPrefix: 'apollo:',
+      keyPrefix: 'apollo-test-2:',
     }),
+
+    persistedQueries: {
+      cache: new BaseRedisCache({
+        client: new Redis({ ...redisOptions }) as RedisClient,
+      }),
+    },
 
     plugins: [
       ApolloServerPluginCacheControl({
-        defaultMaxAge: 36000,
-        calculateHttpHeaders: true,
+        defaultMaxAge: 3600,
+        calculateHttpHeaders: false,
       }),
       ApolloServerPluginDrainHttpServer({ httpServer }),
       responseCachePlugin({
-        sessionId: ({ context, response, operation }) => {
-          console.dir(response);
-          console.log(operation);
-          return context.user ? context.user.id : null;
-        },
-        // Only cache public responses
-        shouldReadFromCache: ({ context }) => context.user,
+        sessionId: ({ context }) => (context.user ? context.user.id : null),
+        // // Only cache public responses
+        shouldReadFromCache: cacheConfig,
         shouldWriteToCache: ({ context }) => context.user,
       }),
       process.env.NODE_ENV === 'production'
