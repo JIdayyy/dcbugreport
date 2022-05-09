@@ -8,12 +8,15 @@ const cacheConfig = (
   if (!requestContext.context.user) {
     return false;
   }
+  console.log(requestContext.operationName);
   if (
     requestContext.operationName === 'GetAllBugsBy' ||
+    requestContext.operationName === 'GetAllWebSites' ||
     requestContext.operationName === 'GetAllComments' ||
     requestContext.operationName === 'GetAllFilesByBug' ||
     requestContext.operationName === 'GetAllFilesByComment' ||
-    requestContext.operationName === 'GetAllNotifications'
+    requestContext.operationName === 'GetAllNotifications' ||
+    requestContext.operationName === 'GetAllCategories'
   ) {
     return false;
   }

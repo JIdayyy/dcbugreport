@@ -34,4 +34,5 @@ const loginJWTCookies = async (
 
   return userWithoutPassword;
 };
+
 export default loginJWTCookies;
