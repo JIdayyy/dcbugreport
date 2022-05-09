@@ -5,7 +5,6 @@ import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { User } from '../../../generated/graphql';
-import platformTypeChecker from '../../../utils/platformTypeChecker';
 import { UserWithoutCountAndPassword } from '@interfaces/user';
 import { setCookieToken, signToken } from '../../../services/authentication';
 import { GQLContext } from '../../../interfaces';
